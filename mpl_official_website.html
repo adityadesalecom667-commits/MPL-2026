@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multivity Premier League | MPL</title>
+  <style>
+    :root{
+      --primary:#1e293b;
+      --secondary:#0f172a;
+      --accent:#2563eb;
+      --light:#f8fafc;
+      --card:#ffffff;
+      --muted:#64748b;
+
+      --kkr:#6d28d9;
+      --mi:#1d4ed8;
+      --csk:#ca8a04;
+      --rcb:#b91c1c;
+      --pbks:#db2777;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
+    body { background:var(--light); color:#111; }
+
+    header { background:linear-gradient(135deg,var(--primary),var(--secondary)); color:#fff; padding:22px; text-align:center; }
+
+    .logo{ display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:10px; }
+    .logo img{ width:48px; height:48px; }
+
+    header h1 { font-size:2.3rem; }
+    header p { opacity:0.9; margin-top:6px; }
+
+    nav { background:var(--secondary); display:flex; justify-content:center; gap:22px; padding:14px; }
+    nav a { color:#e5e7eb; text-decoration:none; font-weight:600; position:relative; }
+    nav a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:0.3s;}
+    nav a:hover::after{width:100%;}
+    nav a:hover { color:#fff; }
+
+    .container { max-width:1100px; margin:32px auto; padding:0 20px; }
+
+    .hero { background:var(--card); border-radius:14px; padding:34px; box-shadow:0 12px 28px rgba(0,0,0,0.08); text-align:center; }
+    .hero h2 { font-size:1.9rem; margin-bottom:10px; color:var(--primary); }
+    .hero p { color:var(--muted); }
+    .hero span { font-weight:bold; color:var(--accent); }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; margin-top:32px; }
+
+    .card { background:var(--card); padding:22px; border-radius:16px; box-shadow:0 10px 24px rgba(0,0,0,0.08); text-align:center; transition:transform 0.25s, box-shadow 0.25s; border-top:4px solid transparent; }
+    .card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.12); }
+    .card h3 { margin-bottom:10px; color:var(--primary); }
+
+    .kkr{ border-top-color:var(--kkr); }
+    .mi{ border-top-color:var(--mi); }
+    .csk{ border-top-color:var(--csk); }
+    .rcb{ border-top-color:var(--rcb); }
+    .pbks{ border-top-color:var(--pbks); }
+
+    footer { margin-top:50px; background:var(--primary); color:#e5e7eb; text-align:center; padding:16px; font-size:0.9rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="mpl-logo.png" alt="MPL Logo" />
+      <h1>Multivity Premier League</h1>
+    </div>
+    <p>Official Cricket Tournament Website • MPL 2026 • Season 4</p>
+  </header>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#teams">Teams</a>
+    <a href="#schedule2026">Schedule</a>
+    <a href="#points2025">Points Table</a>
+    <a href="#history">History</a>
+  </nav>
+
+  <div class="container">
+    <section class="hero">
+      <h2>Welcome to <span>MPL – Multivity Premier League</span></h2>
+      <p>Where talent meets passion and champions are made.</p>
+    </section>
+
+    <section id="teams" class="grid">
+      <div class="card kkr">
+        <img src="KKR.jpeg" alt="KKR Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🟣 KKR</h3>
+        <p>Kolkata Knight Riders</p>
+        <a href="#kkr">View Team →</a>
+      </div>
+      <div class="card mi">
+        <img src="MI.webp" alt="MI Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🔵 MI</h3>
+        <p>Mumbai Indians</p>
+        <a href="#mi">View Team →</a>
+      </div>
+      <div class="card csk">
+        <img src="CSK.webp" alt="CSK Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🟡 CSK</h3>
+        <p>Chennai Super Kings</p>
+        <a href="#csk">View Team →</a>
+      </div>
+      <div class="card rcb">
+        <img src="RCB.png" alt="RCB Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🔴 RCB</h3>
+        <p>Royal Challengers Bengaluru</p>
+        <a href="#rcb">View Team →</a>
+      </div>
+      <div class="card pbks">
+        <img src="PBKS.png" alt="PBKS Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🌸 PBKS</h3>
+        <p>Punjab Kings</p>
+        <a href="#pbks">View Team →</a>
+      </div>
+    </section>
+
+    <section class="hero" id="kkr">
+      <h2>KKR Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Ajinkya Rahane</li>
+        <li>Venkatesh Iyer</li>
+        <li>Prabhsimran Singh</li>
+        <li>Sunil Narine</li>
+        <li>Varun Chakravarthy</li>
+        <li>Rashid Khan</li>
+        <li>Mitchell Starc</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Ravichandran Ashwin</p>
+    </section>
+    <section class="hero" id="mi">
+      <h2>MI Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Rohit Sharma</li>
+        <li>Quinton De Kock</li>
+        <li>Shivam Dube</li>
+        <li>Mitchell Santner</li>
+        <li>Pat Cummins</li>
+        <li>Trent Boult</li>
+        <li>Jasprit Bumrah</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Liam Livingstone</p>
+    </section>
+    <section class="hero" id="csk">
+      <h2>CSK Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Ruturaj Gaikwad</li>
+        <li>Suryakumar Yadav</li>
+        <li>MS Dhoni</li>
+        <li>Ravindra Jadeja</li>
+        <li>Matheesha Pathirana</li>
+        <li>Will Jacks</li>
+        <li>Arshdeep Singh</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Marco Jansen</p>
+    </section>
+    <section class="hero" id="rcb">
+      <h2>RCB Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Phil Salt</li>
+        <li>Virat Kohli</li>
+        <li>Hardik Pandya</li>
+        <li>Andre Russell</li>
+        <li>Krunal Pandya</li>
+        <li>Bhuvneshwar Kumar</li>
+        <li>Josh Hazlewood</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Rajat Patidar</p>
+    </section>
+    <section class="hero" id="pbks">
+      <h2>PBKS Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Shreyas Iyer</li>
+        <li>K. L. Rahul</li>
+        <li>Marcus Stoinis</li>
+        <li>Glenn Maxwell</li>
+        <li>Rinku Singh</li>
+        <li>Yuzvendra Chahal</li>
+        <li>Harshit Rana</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Rachin Ravindra</p>
+    </section>
+
+    <section class="hero" id="schedule2026">
+      <h2>📅 MPL 2026 Match Schedule</h2>
+      <p><strong>Coming Soon…</strong></p>
+      <p>The official fixtures, venues, and match timings for <strong>MPL 2026 – Season 4</strong> will be announced shortly.</p>
+    </section>
+
+    <section class="hero" id="schedule2025">
+      <h2>📜 MPL 2025 Match Schedule & Results</h2>
+      <p>Season 3 fixtures and outcomes</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>🏏 League Matches</h3>
+        <ul>
+          <li>KKR vs MI (16 Mar 2025) – MI won by 38 runs</li>
+          <li>CSK vs RCB (18 Mar 2025) – RCB won by 48 runs</li>
+          <li>PBKS vs KKR (19 Mar 2025) – PBKS won by 3 runs</li>
+          <li>MI vs CSK (20 Mar 2025) – CSK won by 1 wicket</li>
+          <li>RCB vs PBKS (21 Mar 2025) – PBKS won by 16 runs</li>
+          <li>PBKS vs RCB (22 Mar 2025) – RCB won by 1 wicket</li>
+          <li>PBKS vs MI (23 Mar 2025) – MI won by 1 wicket</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🏆 Final</h3>
+        <p><strong>MI vs RCB</strong></p>
+        <p>26 March 2025</p>
+        <p><strong>Winner:</strong> RCB (won by 3 wickets)</p>
+      </div>
+    </section>
+
+    <section class="hero" id="season2025">
+      <h2>🏏 MPL 2025 – Season 3 Highlights</h2>
+      <p>A memorable and competitive season of the Multivity Premier League</p>
+    </section>
+
+    <section class="grid" id="points2025">
+      <div class="card">
+        <h3>📊 MPL 2025 Points Table</h3>
+        <table style="width:100%; border-collapse:collapse; text-align:center;">
+          <thead>
+            <tr style="background:#e5e7eb;">
+              <th style="padding:8px; border:1px solid #ccc;">Rank</th>
+              <th style="padding:8px; border:1px solid #ccc;">Team</th>
+              <th style="padding:8px; border:1px solid #ccc;">Points</th>
+              <th style="padding:8px; border:1px solid #ccc;">Run Rate (RR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">1</td>
+              <td style="padding:8px; border:1px solid #ccc;">PBKS</td>
+              <td style="padding:8px; border:1px solid #ccc;">4</td>
+              <td style="padding:8px; border:1px solid #ccc;">+4.75</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">RCB</td>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">+8</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">3</td>
+              <td style="padding:8px; border:1px solid #ccc;">MI</td>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">+1</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">4</td>
+              <td style="padding:8px; border:1px solid #ccc;">CSK</td>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">-4</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">5</td>
+              <td style="padding:8px; border:1px solid #ccc;">KKR</td>
+              <td style="padding:8px; border:1px solid #ccc;">0</td>
+              <td style="padding:8px; border:1px solid #ccc;">-10.25</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px;"><em>Top 3 teams qualified for playoffs</em></p>
+      </div>
+    </section>
+
+    <section class="hero" id="history">
+      <h2>📜 MPL Season History</h2>
+      <p>Champions of the Multivity Premier League</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>🥇 MPL Season 1</h3>
+        <p><strong>Champion:</strong> PBKS</p>
+      </div>
+      <div class="card">
+        <h3>🥇 MPL Season 2</h3>
+        <p><strong>Champion:</strong> CSK</p>
+      </div>
+      <div class="card">
+        <h3>🥇 MPL Season 3</h3>
+        <p><strong>Champion:</strong> RCB</p>
+      </div>
+    </section>
+
+    <section class="hero" id="awards2025">
+      <h2>🏆 MPL 2025 Awards (Season 3)</h2>
+      <p>Celebrating the best performances of the season</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>🟠 Orange Cap</h3>
+        <p><strong>Marcus Stoinis</strong></p>
+        <p>Most Runs – 171</p>
+      </div>
+
+      <div class="card">
+        <h3>🟣 Purple Cap</h3>
+        <p><strong>Glenn Maxwell</strong></p>
+        <p>Most Wickets – 16</p>
+      </div>
+
+      <div class="card">
+        <h3>🏏 Best Batting Team</h3>
+        <p><strong>Mumbai Indians (MI)</strong></p>
+        <p>Highest Team Runs – 459</p>
+      </div>
+
+      <div class="card">
+        <h3>🎯 Best Bowling Team</h3>
+        <p><strong>Punjab Kings (PBKS)</strong></p>
+        <p>Most Team Wickets – 22</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 Multivity Premier League (MPL) • All Rights Reserved
+  </footer>
+
+</body>
+</html>
