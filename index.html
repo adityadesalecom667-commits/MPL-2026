@@ -44,6 +44,24 @@
     .hero p { color:var(--muted); }
     .hero span { font-weight:bold; color:var(--accent); }
 
+    .countdown{ display:flex; justify-content:center; gap:14px; margin-top:22px; flex-wrap:wrap; }
+    .time-box{
+      background:var(--light);
+      border-radius:12px;
+      padding:14px 18px;
+      min-width:90px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.12);
+      animation: float 2.5s ease-in-out infinite;
+    }
+    .time-box span{ display:block; font-size:1.6rem; font-weight:bold; color:var(--accent); }
+    .time-box small{ font-size:0.75rem; color:var(--muted); letter-spacing:1px; }
+
+    @keyframes float{
+      0%{ transform:translateY(0); }
+      50%{ transform:translateY(-6px); }
+      100%{ transform:translateY(0); }
+    }
+
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; margin-top:32px; }
 
     .card { background:var(--card); padding:22px; border-radius:16px; box-shadow:0 10px 24px rgba(0,0,0,0.08); text-align:center; transition:transform 0.25s, box-shadow 0.25s; border-top:4px solid transparent; }
@@ -60,6 +78,18 @@
   </style>
 </head>
 <body>
+  <!-- Access Gate -->
+  <div id="accessGate" style="position:fixed; inset:0; background:rgba(15,23,42,0.95); color:#fff; display:flex; align-items:center; justify-content:center; z-index:9999;">
+    <div style="background:#0f172a; padding:28px; border-radius:14px; width:90%; max-width:420px; box-shadow:0 20px 50px rgba(0,0,0,.4); text-align:center;">
+      <h2 style="margin-bottom:8px;">🔐 MPL Access</h2>
+      <p style="opacity:.9; margin-bottom:18px;">Enter your <b>Registration Email</b> and <b>Access Code</b></p>
+      <input id="loginEmail" type="email" placeholder="Registered Email" style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:none;" />
+      <input id="loginCode" type="text" placeholder="Access Code" style="width:100%; padding:10px; margin-bottom:14px; border-radius:8px; border:none;" />
+      <button onclick="checkAccess()" style="width:100%; padding:12px; border:none; border-radius:10px; background:#2563eb; color:#fff; font-weight:bold; cursor:pointer;">Enter</button>
+      <p id="loginMsg" style="margin-top:12px; color:#fca5a5;"></p>
+      <p style="margin-top:14px; font-size:.85rem; opacity:.8;">Not registered? Use the Registration section.</p>
+    </div>
+  </div>
 
   <header>
     <div class="logo">
@@ -75,12 +105,14 @@
     <a href="#schedule2026">Schedule</a>
     <a href="#points2025">Points Table</a>
     <a href="#history">History</a>
+    <a href="#registration">Registration</a>
   </nav>
 
   <div class="container">
     <section class="hero">
       <h2>Welcome to <span>MPL – Multivity Premier League</span></h2>
       <p>Where talent meets passion and champions are made.</p>
+      <div id="countdown" style="margin-top:20px; font-size:1.2rem; font-weight:bold; color:var(--accent);"></div>
     </section>
 
     <section id="teams" class="grid">
@@ -191,6 +223,15 @@
       <h2>📅 MPL 2026 Match Schedule</h2>
       <p><strong>Coming Soon…</strong></p>
       <p>The official fixtures, venues, and match timings for <strong>MPL 2026 – Season 4</strong> will be announced shortly.</p>
+    </section>
+
+    <section class="hero" id="registration">
+      <h2>📝 MPL 2026 Registration <span id="regBadge" style="margin-left:8px; padding:4px 10px; border-radius:999px; font-size:.75rem; background:#fde68a; color:#92400e; vertical-align:middle;">Limited Slots</span></h2>
+      <p id="regStatus">Register now to be a part of the Multivity Premier League</p>
+      <a id="regLink" href="https://docs.google.com/forms/d/e/1FAIpQLScxKvkdafgDOi8_5gLJyXM1VpELidMFjaO9EAJtmjCF8_YBcA/viewform" target="_blank" style="display:inline-block; margin-top:18px;">
+        <button id="regBtn" style="padding:14px 22px; background:var(--accent); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:bold; cursor:pointer;">Click here for Registration</button>
+      </a>
+      <p id="regMsg" style="margin-top:12px; color:var(--muted); font-size:.9rem;">Opens Google Form in a new tab</p>
     </section>
 
     <section class="hero" id="schedule2025">
@@ -330,5 +371,98 @@
     © 2026 Multivity Premier League (MPL) • All Rights Reserved
   </footer>
 
+<script>
+  // MPL 2026 Countdown (May 2026)
+  const targetDate = new Date('May 1, 2026 00:00:00').getTime();
+
+  const countdownEl = document.getElementById('countdown');
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+      countdownEl.innerHTML = '🏏 MPL 2026 is LIVE!';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    countdownEl.innerHTML = `⏳ MPL 2026 starts in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+<script>
+  // ===== ACCESS CODE SYSTEM =====
+  // 1) Add/rotate codes here (share individually with registrants)
+  const VALID_CODES = [
+    'MPL26-A1', 'MPL26-B2', 'MPL26-C3'
+  ];
+
+  // 2) Simple gate check
+  function checkAccess(){
+    const email = document.getElementById('loginEmail').value.trim();
+    const code = document.getElementById('loginCode').value.trim();
+    const msg = document.getElementById('loginMsg');
+
+    if(!email || !code){ msg.textContent = 'Please fill both fields.'; return; }
+
+    if(VALID_CODES.includes(code)){
+      localStorage.setItem('mpl_access','granted');
+      document.getElementById('accessGate').style.display='none';
+    } else {
+      msg.textContent = 'Invalid access code.';
+    }
+  }
+
+  // 3) Remember access on this device
+  if(localStorage.getItem('mpl_access')==='granted'){
+    document.addEventListener('DOMContentLoaded',()=>{
+      const g=document.getElementById('accessGate'); if(g) g.style.display='none';
+    });
+  }
+</script>
+<script>
+  // ===== REGISTRATION AUTO-CLOSE SETTINGS =====
+  // Change this date/time when needed (YYYY-MM-DDTHH:MM:SS)
+  const REG_CLOSE_AT = new Date('2025-12-31T23:59:59').getTime();
+
+  function updateRegistrationState(){
+    const now = Date.now();
+    const btn = document.getElementById('regBtn');
+    const link = document.getElementById('regLink');
+    const status = document.getElementById('regStatus');
+    const msg = document.getElementById('regMsg');
+    const badge = document.getElementById('regBadge');
+
+    if(!btn || !link) return;
+
+    if(now > REG_CLOSE_AT){
+      // Closed state
+      btn.disabled = true;
+      btn.style.background = '#9ca3af';
+      btn.style.cursor = 'not-allowed';
+      link.removeAttribute('href');
+      status.textContent = '⛔ Registration Closed';
+      msg.textContent = 'Registrations for MPL 2026 are now closed.';
+      msg.style.color = '#b91c1c';
+      badge.textContent = 'Closed';
+      badge.style.background = '#fee2e2';
+      badge.style.color = '#991b1b';
+    } else {
+      // Open state
+      badge.textContent = 'Limited Slots';
+      badge.style.background = '#fde68a';
+      badge.style.color = '#92400e';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updateRegistrationState);
+</script>
 </body>
 </html>
