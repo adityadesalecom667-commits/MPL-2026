@@ -106,6 +106,7 @@
     <a href="#points2025">Points Table</a>
     <a href="#history">History</a>
     <a href="#registration">Registration</a>
+    <a href="#privacy">Privacy Policy</a>
   </nav>
 
   <div class="container">
@@ -371,6 +372,38 @@
     © 2026 Multivity Premier League (MPL) • All Rights Reserved
   </footer>
 
+  <!-- PRIVACY CONSENT MODAL -->
+  <div id="privacyModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:10000;">
+    <div style="background:#ffffff; padding:26px; border-radius:14px; max-width:520px; width:90%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+      <h2 style="margin-bottom:10px;">Privacy Policy</h2>
+      <p style="font-size:0.95rem; color:#475569; line-height:1.5;">
+        By using the MPL Official Website, you agree that basic, non-personal data
+        such as device type and visit statistics may be collected for improving
+        the website experience. No sensitive personal data is sold or misused.
+      </p>
+      <button onclick="acceptPrivacy()" style="margin-top:18px; padding:12px 22px; background:#2563eb; color:#fff; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">I Agree</button>
+    </div>
+  </div>
+
+  <section class="hero" id="privacy">
+    <h2>🔐 Privacy Policy</h2>
+    <p>Your privacy is important to us.</p>
+    <ul style="text-align:left; max-width:700px; margin:20px auto; color:#475569;">$1<li><strong>You have now become an official and Digital Member of Late Multivty.</strong> Please ensure that you follow all the rules strictly.</li></ul>
+  </section>
+
+  <script>
+    function acceptPrivacy(){
+      localStorage.setItem('mpl_privacy_accepted','yes');
+      document.getElementById('privacyModal').style.display='none';
+    }
+
+    if(localStorage.getItem('mpl_privacy_accepted')==='yes'){
+      document.addEventListener('DOMContentLoaded',()=>{
+        const m=document.getElementById('privacyModal'); if(m) m.style.display='none';
+      });
+    }
+  </script>
+
 <script>
   // MPL 2026 Countdown (May 2026)
   const targetDate = new Date('May 1, 2026 00:00:00').getTime();
@@ -398,19 +431,10 @@
   setInterval(updateCountdown, 1000);
 </script>
 <script>
-  // ===== ACCESS CODE SYSTEM =====
-  // 1) Add/rotate codes here (share individually with registrants)
-  const VALID_CODES = [
-    'MPL26-A1', 'MPL26-B2', 'MPL26-C3'
-  ];
+  // ===== ACCESS CODE + MEMBER ID SYSTEM =====
+// Member IDs are generated during Google Form submission
+// Access codes are validated for site entry
 
-  // 2) Simple gate check
-  function checkAccess(){
-    const email = document.getElementById('loginEmail').value.trim();
-    const code = document.getElementById('loginCode').value.trim();
-    const msg = document.getElementById('loginMsg');
-
-    if(!email || !code){ msg.textContent = 'Please fill both fields.'; return; }
 
     if(VALID_CODES.includes(code)){
       localStorage.setItem('mpl_access','granted');
