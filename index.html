@@ -388,72 +388,25 @@
   <section class="hero" id="privacy">
     <h2>🔐 Privacy Policy</h2>
     <p>Your privacy is important to us.</p>
-    <ul style="text-align:left; max-width:700px; margin:20px auto; color:#475569;">$1<li><strong>You have now become an official and Digital Member of Late Multivty.</strong> Please ensure that you follow all the rules strictly.</li></ul>
+    <ul style="text-align:left; max-width:700px; margin:20px auto; color:#475569;"><li><strong>You have now become an official and Digital Member of Late Multivty.</strong> Please ensure that you follow all the rules strictly.</li></ul>
   </section>
 
-  <script>
-    function acceptPrivacy(){
-      localStorage.setItem('mpl_privacy_accepted','yes');
-      document.getElementById('privacyModal').style.display='none';
-    }
-
-    if(localStorage.getItem('mpl_privacy_accepted')==='yes'){
-      document.addEventListener('DOMContentLoaded',()=>{
-        const m=document.getElementById('privacyModal'); if(m) m.style.display='none';
-      });
-    }
-  </script>
-
 <script>
-  // MPL 2026 Countdown (May 2026)
-  const targetDate = new Date('May 1, 2026 00:00:00').getTime();
+function acceptPrivacy(){
+  localStorage.setItem('mpl_privacy_accepted','yes');
+  document.getElementById('privacyModal').style.display='none';
+}
 
-  const countdownEl = document.getElementById('countdown');
-
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    if (distance <= 0) {
-      countdownEl.innerHTML = '🏏 MPL 2026 is LIVE!';
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdownEl.innerHTML = `⏳ MPL 2026 starts in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+window.addEventListener('load',()=>{
+  if(localStorage.getItem('mpl_privacy_accepted')==='yes'){
+    const m=document.getElementById('privacyModal');
+    if(m) m.style.display='none';
   }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+});
 </script>
-<script>
-  // ===== ACCESS CODE + MEMBER ID SYSTEM =====
-// Member IDs are generated during Google Form submission
-// Access codes are validated for site entry
 
-
-    if(VALID_CODES.includes(code)){
-      localStorage.setItem('mpl_access','granted');
-      document.getElementById('accessGate').style.display='none';
-    } else {
-      msg.textContent = 'Invalid access code.';
-    }
-  }
-
-  // 3) Remember access on this device
-  if(localStorage.getItem('mpl_access')==='granted'){
-    document.addEventListener('DOMContentLoaded',()=>{
-      const g=document.getElementById('accessGate'); if(g) g.style.display='none';
-    });
-  }
-</script>
 <script>
   // ===== REGISTRATION AUTO-CLOSE SETTINGS =====
-  // Change this date/time when needed (YYYY-MM-DDTHH:MM:SS)
   const REG_CLOSE_AT = new Date('2025-12-31T23:59:59').getTime();
 
   function updateRegistrationState(){
@@ -467,7 +420,6 @@
     if(!btn || !link) return;
 
     if(now > REG_CLOSE_AT){
-      // Closed state
       btn.disabled = true;
       btn.style.background = '#9ca3af';
       btn.style.cursor = 'not-allowed';
@@ -479,7 +431,6 @@
       badge.style.background = '#fee2e2';
       badge.style.color = '#991b1b';
     } else {
-      // Open state
       badge.textContent = 'Limited Slots';
       badge.style.background = '#fde68a';
       badge.style.color = '#92400e';
@@ -487,6 +438,35 @@
   }
 
   document.addEventListener('DOMContentLoaded', updateRegistrationState);
+</script>
+
+<script>
+// ===== TEMP LOGIN FIX (PART 2 ONLY) =====
+function checkAccess(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const code = document.getElementById('loginCode').value.trim();
+  const msg = document.getElementById('loginMsg');
+
+  if(!email || !code){
+    msg.textContent = "Please enter Email and Access Code";
+    return;
+  }
+
+  // TEMP TEST LOGIN (confirms button + JS works)
+  if(code.startsWith("MPL-")){
+    localStorage.setItem('mpl_access','granted');
+    document.getElementById('accessGate').style.display = 'none';
+  } else {
+    msg.textContent = "Invalid Access Code";
+  }
+}
+
+// Auto-skip login if already logged in
+if(localStorage.getItem('mpl_access') === 'granted'){
+  window.addEventListener('load', () => {
+    document.getElementById('accessGate').style.display = 'none';
+  });
+}
 </script>
 </body>
 </html>
