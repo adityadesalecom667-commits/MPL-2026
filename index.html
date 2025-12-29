@@ -79,12 +79,14 @@
 </head>
 <body>
   <!-- Access Gate -->
-  <div id="accessGate" style="position:fixed; inset:0; background:rgba(15,23,42,0.95); color:#fff; display:flex; align-items:center; justify-content:center; z-index:9999;">
+  <div id="accessGate" style="position:fixed; inset:0; background:rgba(15,23,42,0.95); color:#fff; display:flex; align-items:center; justify-content:center; z-index:9999; pointer-events:none;">
     <div style="background:#0f172a; padding:28px; border-radius:14px; width:90%; max-width:420px; box-shadow:0 20px 50px rgba(0,0,0,.4); text-align:center;">
       <h2 style="margin-bottom:8px;">🔐 MPL Access</h2>
       <p style="opacity:.9; margin-bottom:18px;">Enter your <b>Registration Email</b> and <b>Access Code</b></p>
-      <input id="loginEmail" type="email" placeholder="Registered Email" style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:none;" />
-      <input id="loginCode" type="text" placeholder="Access Code" style="width:100%; padding:10px; margin-bottom:14px; border-radius:8px; border:none;" />
+      <input id="loginMemberId" type="text" placeholder="Member ID"
+      style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:none;" />
+      <input id="loginCode" type="text" placeholder="Access Code"
+      style="width:100%; padding:10px; margin-bottom:14px; border-radius:8px; border:none;" />
       <button onclick="checkAccess()" style="width:100%; padding:12px; border:none; border-radius:10px; background:#2563eb; color:#fff; font-weight:bold; cursor:pointer;">Enter</button>
       <p id="loginMsg" style="margin-top:12px; color:#fca5a5;"></p>
       <p id="loginRegister" style="margin-top:14px; font-size:.85rem; opacity:.9;">Don’t have an account?<br><a href="https://docs.google.com/forms/d/e/1FAIpQLScxKvkdafgDOi8_5gLJyXM1VpELidMFjaO9EAJtmjCF8_YBcA/viewform" target="_blank" style="color:#60a5fa; font-weight:bold; text-decoration:none;">Register first</a></p>
@@ -373,7 +375,7 @@
   </footer>
 
   <!-- PRIVACY CONSENT MODAL -->
-  <div id="privacyModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:10000;">
+  <div id="privacyModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:10000; pointer-events:auto;">
     <div style="background:#ffffff; padding:26px; border-radius:14px; max-width:520px; width:90%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
       <h2 style="margin-bottom:10px;">Privacy Policy</h2>
       <p style="font-size:0.95rem; color:#475569; line-height:1.5;">
@@ -392,81 +394,40 @@
   </section>
 
 <script>
+// ===== MEMBER ID + ACCESS CODE LOGIN (FRONTEND ONLY) =====
+function checkAccess(){
+  const memberId = document.getElementById('loginMemberId').value.trim();
+  const code = document.getElementById('loginCode').value.trim();
+  const msg = document.getElementById('loginMsg');
+
+  if(!memberId || !code){
+    msg.textContent = "Please enter Member ID and Access Code";
+    return;
+  }
+
+  if(memberId.startsWith("MPL-") && code.startsWith("MPL-")){
+    localStorage.setItem('mpl_access','granted');
+    document.getElementById('accessGate').style.display = 'none';
+  } else {
+    msg.textContent = "Invalid Member ID or Access Code";
+  }
+}
+
 function acceptPrivacy(){
   localStorage.setItem('mpl_privacy_accepted','yes');
   document.getElementById('privacyModal').style.display='none';
+  document.getElementById('accessGate').style.pointerEvents='auto';
 }
 
 window.addEventListener('load',()=>{
   if(localStorage.getItem('mpl_privacy_accepted')==='yes'){
-    const m=document.getElementById('privacyModal');
-    if(m) m.style.display='none';
+    document.getElementById('privacyModal').style.display='none';
+    document.getElementById('accessGate').style.pointerEvents='auto';
+  }
+  if(localStorage.getItem('mpl_access')==='granted'){
+    document.getElementById('accessGate').style.display='none';
   }
 });
-</script>
-
-<script>
-  // ===== REGISTRATION AUTO-CLOSE SETTINGS =====
-  const REG_CLOSE_AT = new Date('2025-12-31T23:59:59').getTime();
-
-  function updateRegistrationState(){
-    const now = Date.now();
-    const btn = document.getElementById('regBtn');
-    const link = document.getElementById('regLink');
-    const status = document.getElementById('regStatus');
-    const msg = document.getElementById('regMsg');
-    const badge = document.getElementById('regBadge');
-
-    if(!btn || !link) return;
-
-    if(now > REG_CLOSE_AT){
-      btn.disabled = true;
-      btn.style.background = '#9ca3af';
-      btn.style.cursor = 'not-allowed';
-      link.removeAttribute('href');
-      status.textContent = '⛔ Registration Closed';
-      msg.textContent = 'Registrations for MPL 2026 are now closed.';
-      msg.style.color = '#b91c1c';
-      badge.textContent = 'Closed';
-      badge.style.background = '#fee2e2';
-      badge.style.color = '#991b1b';
-    } else {
-      badge.textContent = 'Limited Slots';
-      badge.style.background = '#fde68a';
-      badge.style.color = '#92400e';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', updateRegistrationState);
-</script>
-
-<script>
-// ===== TEMP LOGIN FIX (PART 2 ONLY) =====
-function checkAccess(){
-  const email = document.getElementById('loginEmail').value.trim();
-  const code = document.getElementById('loginCode').value.trim();
-  const msg = document.getElementById('loginMsg');
-
-  if(!email || !code){
-    msg.textContent = "Please enter Email and Access Code";
-    return;
-  }
-
-  // TEMP TEST LOGIN (confirms button + JS works)
-  if(code.startsWith("MPL-")){
-    localStorage.setItem('mpl_access','granted');
-    document.getElementById('accessGate').style.display = 'none';
-  } else {
-    msg.textContent = "Invalid Access Code";
-  }
-}
-
-// Auto-skip login if already logged in
-if(localStorage.getItem('mpl_access') === 'granted'){
-  window.addEventListener('load', () => {
-    document.getElementById('accessGate').style.display = 'none';
-  });
-}
 </script>
 </body>
 </html>
