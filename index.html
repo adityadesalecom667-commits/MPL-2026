@@ -110,6 +110,7 @@
     <a href="#registration">Registration</a>
     <a href="#privacy">Privacy Policy</a>
   </nav>
+<button id="surpriseBtn" style="position:fixed; bottom:20px; right:20px; padding:12px 18px; border-radius:999px; border:none; background:#7c3aed; color:#fff; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,.25); cursor:pointer;">🎁 Surprise</button>
 
   <div class="container">
     <section class="hero">
@@ -427,6 +428,54 @@ window.addEventListener('load',()=>{
   if(localStorage.getItem('mpl_access')==='granted'){
     document.getElementById('accessGate').style.display='none';
   }
+});
+</script>
+
+<!-- Surprise Page / Modal -->
+<div id="surpriseModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:12000; align-items:center; justify-content:center;">
+  <div style="background:#0f172a; color:#e5e7eb; width:min(92%,700px); border-radius:16px; padding:24px; box-shadow:0 30px 80px rgba(0,0,0,.5);">
+    <h2 style="font-size:1.4rem; margin-bottom:12px;">A Surprise for Multivity Members 🎉</h2>
+    <p style="line-height:1.6; color:#cbd5f5;">
+      5 years ago our honourable Multivity member <b>"Papya"</b> got snapped due to the Avengers mod downloaded by the President.
+      As a tribute, we are sending parcels to every Multivity member.
+      <br/><br/>Please choose which one you want to take:
+    </p>
+
+    <div id="surpriseChoices" style="display:flex; gap:12px; margin-top:18px; flex-wrap:wrap;">
+      <button class="choiceBtn" data-choice="Papya Wars" style="flex:1; min-width:180px; padding:14px; border-radius:12px; border:none; background:#ef4444; color:white; font-weight:600; cursor:pointer;">Papya Wars</button>
+      <button class="choiceBtn" data-choice="Papya Endgame" style="flex:1; min-width:180px; padding:14px; border-radius:12px; border:none; background:#22c55e; color:white; font-weight:600; cursor:pointer;">Papya Endgame</button>
+    </div>
+
+    <div id="surpriseMsg" style="display:none; margin-top:18px; padding:14px; border-radius:12px; background:#020617; color:#a7f3d0;">
+      Your parcel will be arrived by tomorrow.
+    </div>
+
+    <div style="text-align:right; margin-top:18px;">
+      <button id="closeSurprise" style="background:transparent; color:#93c5fd; border:none; cursor:pointer;">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Surprise feature logic
+const surpriseBtn = document.getElementById('surpriseBtn');
+const surpriseModal = document.getElementById('surpriseModal');
+const closeSurprise = document.getElementById('closeSurprise');
+const surpriseMsg = document.getElementById('surpriseMsg');
+
+surpriseBtn.addEventListener('click', ()=>{
+  surpriseModal.style.display = 'flex';
+  surpriseMsg.style.display = 'none';
+});
+
+closeSurprise.addEventListener('click', ()=>{
+  surpriseModal.style.display = 'none';
+});
+
+Array.from(document.getElementsByClassName('choiceBtn')).forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    surpriseMsg.style.display = 'block';
+  });
 });
 </script>
 </body>
