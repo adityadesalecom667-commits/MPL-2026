@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1e293b">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multivity Premier League | MPL</title>
@@ -95,12 +97,72 @@ button, input{
 
 /* ===== MOBILE VIEW ===== */
 @media (max-width: 768px){
-  
+  body{ font-size:15px; }
+
+  header{ padding:16px 12px; }
+  .logo img{ width:36px; height:36px; }
+
   nav{
-    flex-direction:column;
-    gap:10px;
-    padding:12px;
+    flex-direction:row;
+    overflow-x:auto;
+    white-space:nowrap;
+    gap:16px;
+    justify-content:flex-start;
+    padding:10px 12px;
   }
+  nav a{ font-size:0.9rem; }
+
+  .container{ padding:0 12px; }
+
+  .hero{
+    padding:20px 16px;
+    border-radius:12px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:14px;
+  }
+
+  .card img{
+    max-width:80px;
+    height:auto;
+  }
+
+  h1{ font-size:1.5rem !important; }
+  h2{ font-size:1.25rem !important; }
+  h3{ font-size:1.05rem; }
+
+  p, li{ font-size:0.95rem; line-height:1.45; }
+
+  /* Floating surprise button */
+  #surpriseBtn{
+    bottom:12px;
+    right:12px;
+    padding:10px 14px;
+    font-size:0.85rem;
+  }
+
+  /* Modals */
+  #surpriseModal > div,
+  #privacyModal > div,
+  #accessGate > div{
+    width:94% !important;
+    padding:18px !important;
+  }
+
+  /* Tables scroll nicely */
+  table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+}
 
   h1{
     font-size:1.6rem !important;
@@ -153,7 +215,7 @@ button, input{
 </head>
 <body>
   <!-- Access Gate -->
-  <div id="accessGate" style="position:fixed; inset:0; background:rgba(15,23,42,0.95); color:#fff; display:flex; align-items:center; justify-content:center; z-index:9999; pointer-events:none;">
+  <div id="accessGate" style="position:fixed; inset:0; background:rgba(15,23,42,0.95); color:#fff; display:flex; align-items:center; justify-content:center; z-index:9999; pointer-events:auto;">
     <div style="background:#0f172a; padding:28px; border-radius:14px; width:90%; max-width:420px; box-shadow:0 20px 50px rgba(0,0,0,.4); text-align:center;">
       <h2 style="margin-bottom:8px;">🔐 MPL Access</h2>
       <p style="opacity:.9; margin-bottom:18px;">Enter your <b>Registration Email</b> and <b>Access Code</b></p>
@@ -304,13 +366,15 @@ button, input{
     </section>
 
     <section class="hero" id="registration">
-      <h2>📝 MPL 2026 Registration <span id="regBadge" style="margin-left:8px; padding:4px 10px; border-radius:999px; font-size:.75rem; background:#fde68a; color:#92400e; vertical-align:middle;">Limited Slots</span></h2>
-      <p id="regStatus">Register now to be a part of the Multivity Premier League</p>
-      <a id="regLink" href="https://docs.google.com/forms/d/e/1FAIpQLScxKvkdafgDOi8_5gLJyXM1VpELidMFjaO9EAJtmjCF8_YBcA/viewform" target="_blank" style="display:inline-block; margin-top:18px;">
-        <button id="regBtn" style="padding:14px 22px; background:var(--accent); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:bold; cursor:pointer;">Click here for Registration</button>
-      </a>
-      <p id="regMsg" style="margin-top:12px; color:var(--muted); font-size:.9rem;">Opens Google Form in a new tab</p>
-    </section>
+  <h2>📝 MPL 2026 Registration <span id="regBadge" style="margin-left:8px; padding:4px 10px; border-radius:999px; font-size:.75rem; background:#fde68a; color:#92400e; vertical-align:middle;">Limited Slots</span></h2>
+  <p id="regStatus">Register now to be a part of the Multivity Premier League</p>
+  <div id="regAction">
+    <a id="regLink" href="https://docs.google.com/forms/d/e/1FAIpQLScxKvkdafgDOi8_5gLJyXM1VpELidMFjaO9EAJtmjCF8_YBcA/viewform" target="_blank" style="display:inline-block; margin-top:18px;">
+      <button id="regBtn" style="padding:14px 22px; background:var(--accent); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:bold; cursor:pointer;">Click here for Registration</button>
+    </a>
+    <p id="regMsg" style="margin-top:12px; color:var(--muted); font-size:.9rem;">Opens Google Form in a new tab</p>
+  </div>
+</section>
 
     <section class="hero" id="schedule2025">
       <h2>📜 MPL 2025 Match Schedule & Results</h2>
@@ -469,6 +533,26 @@ button, input{
   </section>
 
 <script>
+// ===== REGISTRATION AUTO CLOSE LOGIC =====
+const REG_CLOSE_DATE = new Date('2025-12-31T23:59:59');
+
+function checkRegistrationStatus(){
+  const now = new Date();
+  const status = document.getElementById('regStatus');
+  const action = document.getElementById('regAction');
+  const badge = document.getElementById('regBadge');
+
+  if(now > REG_CLOSE_DATE){
+    status.textContent = '🚫 Registration Closed';
+    action.innerHTML = '<p style="margin-top:16px; font-weight:bold; color:#dc2626;">Registrations for MPL 2026 are now closed.</p>';
+    badge.textContent = 'Closed';
+    badge.style.background = '#fee2e2';
+    badge.style.color = '#991b1b';
+  }
+}
+
+checkRegistrationStatus();
+
 // ===== MEMBER ID + ACCESS CODE LOGIN (FRONTEND ONLY) =====
 function checkAccess(){
   const memberId = document.getElementById('loginMemberId').value.trim();
@@ -497,7 +581,6 @@ function acceptPrivacy(){
 window.addEventListener('load',()=>{
   if(localStorage.getItem('mpl_privacy_accepted')==='yes'){
     document.getElementById('privacyModal').style.display='none';
-    document.getElementById('accessGate').style.pointerEvents='auto';
   }
   if(localStorage.getItem('mpl_access')==='granted'){
     document.getElementById('accessGate').style.display='none';
@@ -559,6 +642,11 @@ Array.from(document.getElementsByClassName('choiceBtn')).forEach(btn=>{
     bar.style.width = '65%';
   });
 });
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
 </script>
 </body>
 </html>
