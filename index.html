@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1e293b">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multivity Premier League | MPL</title>
@@ -248,42 +250,10 @@ button, input{
 
   <div class="container">
     <section class="hero">
-  <h2>Welcome to <span>MPL – Multivity Premier League</span></h2>
-  <p>Where talent meets passion and champions are made.</p>
-
-  <div class="mobile-actions">
-    <a href="#teams">Teams</a>
-    <a href="#schedule2026">Schedule</a>
-  </div>
-
-  <div class="mobile-team-slider">
-    <div class="mobile-team-card">
-      <img src="KKR.jpeg" />
-      <h4>KKR</h4>
-      <a href="#kkr">View</a>
-    </div>
-    <div class="mobile-team-card">
-      <img src="MI.webp" />
-      <h4>MI</h4>
-      <a href="#mi">View</a>
-    </div>
-    <div class="mobile-team-card">
-      <img src="CSK.webp" />
-      <h4>CSK</h4>
-      <a href="#csk">View</a>
-    </div>
-    <div class="mobile-team-card">
-      <img src="RCB.png" />
-      <h4>RCB</h4>
-      <a href="#rcb">View</a>
-    </div>
-    <div class="mobile-team-card">
-      <img src="PBKS.png" />
-      <h4>PBKS</h4>
-      <a href="#pbks">View</a>
-    </div>
-  </div>
-</section>
+      <h2>Welcome to <span>MPL – Multivity Premier League</span></h2>
+      <p>Where talent meets passion and champions are made.</p>
+      <div id="countdown" style="margin-top:20px; font-size:1.2rem; font-weight:bold; color:var(--accent);"></div>
+    </section>
 
     <section id="teams" class="grid">
       <div class="card kkr">
@@ -672,6 +642,11 @@ Array.from(document.getElementsByClassName('choiceBtn')).forEach(btn=>{
     bar.style.width = '65%';
   });
 });
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
 </script>
 </body>
 </html>
