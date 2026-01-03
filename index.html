@@ -244,15 +244,30 @@ button, input{
     <a href="#registration">Registration</a>
     <a href="#privacy">Privacy Policy</a>
   </nav>
-<button id="surpriseBtn" style="position:fixed; bottom:20px; right:20px; padding:12px 18px; border-radius:999px; border:none; background:#7c3aed; color:#fff; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,.25); cursor:pointer;">🎁 Surprise</button>
-
   <div class="container">
-    <section class="hero">
-      <h2>Welcome to <span>MPL – Multivity Premier League</span></h2>
-      <p>Where talent meets passion and champions are made.</p>
-      <div id="countdown" style="margin-top:20px; font-size:1.2rem; font-weight:bold; color:var(--accent);"></div>
-    </section>
+    <section class="hero" id="suggestions">
+  <h2>💡 Suggestion Box</h2>
+  <p>Help us improve MPL by sharing your ideas.</p>
 
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdgOJ8v18Ckv7yRCkWst1vfuZh55ZXQuCq_W7_XKh8PvmchQ/viewform" target="_blank">
+    <button style="
+      padding:14px 22px;
+      background:#2563eb;
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      font-size:1rem;
+      font-weight:bold;
+      cursor:pointer;
+    ">
+      Submit a Suggestion
+    </button>
+  </a>
+</section>
+  <p style="margin-top:10px; font-size:0.85rem; color:#64748b;">
+    Suggestions are reviewed by the MPL core team.
+  </p>
+</section>
     <section id="teams" class="grid">
       <div class="card kkr">
         <img src="KKR.jpeg" alt="KKR Logo" style="width:100px; margin-bottom:10px;" />
@@ -583,62 +598,6 @@ window.addEventListener('load',()=>{
   if(localStorage.getItem('mpl_access')==='granted'){
     document.getElementById('accessGate').style.display='none';
   }
-});
-</script>
-
-<!-- Surprise Page / Modal -->
-<div id="surpriseModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:12000; align-items:center; justify-content:center;">
-  <div style="background:#0f172a; color:#e5e7eb; width:min(92%,700px); border-radius:16px; padding:24px; box-shadow:0 30px 80px rgba(0,0,0,.5);">
-    <h2 style="font-size:1.4rem; margin-bottom:12px;">A Surprise for Multivity Members 🎉</h2>
-    <p style="line-height:1.6; color:#cbd5f5;">
-      5 years ago our honourable Multivity member <b>"Papya"</b> got snapped due to the Avengers mod downloaded by the President.
-      As a tribute, we are sending parcels to every Multivity member.
-      <br/><br/>Please choose which one you want to take:
-    </p>
-
-    <div id="surpriseChoices" style="display:flex; gap:12px; margin-top:18px; flex-wrap:wrap;">
-      <button class="choiceBtn" data-choice="Papya Wars" style="flex:1; min-width:180px; padding:14px; border-radius:12px; border:none; background:#ef4444; color:white; font-weight:600; cursor:pointer;">Papya Wars</button>
-      <button class="choiceBtn" data-choice="Papya Endgame" style="flex:1; min-width:180px; padding:14px; border-radius:12px; border:none; background:#22c55e; color:white; font-weight:600; cursor:pointer;">Papya Endgame</button>
-    </div>
-
-    <div id="surpriseMsg" style="display:none; margin-top:18px; padding:16px; border-radius:12px; background:#020617; color:#a7f3d0;">
-  <p id="surpriseStatusText" style="margin-bottom:12px;">📦 Status: Processing your parcel</p>
-  <div style="width:100%; background:#1e293b; border-radius:999px; overflow:hidden; height:10px;">
-    <div id="trackerBar" style="width:0%; height:100%; background:linear-gradient(90deg,#22c55e,#4ade80); transition:width 2s ease;"></div>
-  </div>
-  <p style="margin-top:12px; font-size:0.9rem; color:#cbd5f5;">
-    ⚠️ Update: Due to unexpected logistical delays, parcel delivery has been rescheduled. Thank you for your patience.
-  </p>
-</div>
-
-    <div style="text-align:right; margin-top:18px;">
-      <button id="closeSurprise" style="background:transparent; color:#93c5fd; border:none; cursor:pointer;">Close</button>
-    </div>
-  </div>
-</div>
-
-<script>
-// Surprise feature logic
-const surpriseBtn = document.getElementById('surpriseBtn');
-const surpriseModal = document.getElementById('surpriseModal');
-const closeSurprise = document.getElementById('closeSurprise');
-const surpriseMsg = document.getElementById('surpriseMsg');
-
-surpriseBtn.addEventListener('click', ()=>{
-  surpriseModal.style.display = 'flex';
-  surpriseMsg.style.display = 'none';
-});
-
-closeSurprise.addEventListener('click', ()=>{
-  surpriseModal.style.display = 'none';
-});
-
-Array.from(document.getElementsByClassName('choiceBtn')).forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    surpriseMsg.style.display = 'block';
-    const bar = document.getElementById('trackerBar');
-    bar.style.width = '65%';
-  });
 });
 </script>
 </body>
