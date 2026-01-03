@@ -1,201 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Multivity Premier League | MPL</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multivity Premier League | MPL</title>
+  <style>
+    :root{
+      --primary:#1e293b;
+      --secondary:#0f172a;
+      --accent:#2563eb;
+      --light:#f8fafc;
+      --card:#ffffff;
+      --muted:#64748b;
 
+      --kkr:#6d28d9;
+      --mi:#1d4ed8;
+      --csk:#ca8a04;
+      --rcb:#b91c1c;
+      --pbks:#db2777;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; }
+    body { background:var(--light); color:#111; }
+
+    header { background:linear-gradient(135deg,var(--primary),var(--secondary)); color:#fff; padding:22px; text-align:center; }
+
+    .logo{ display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:10px; }
+    .logo img{ width:48px; height:48px; }
+
+    header h1 { font-size:2.3rem; }
+    header p { opacity:0.9; margin-top:6px; }
+
+    nav { background:var(--secondary); display:flex; justify-content:center; gap:22px; padding:14px; }
+    nav a { color:#e5e7eb; text-decoration:none; font-weight:600; position:relative; }
+    nav a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:var(--accent); transition:0.3s;}
+    nav a:hover::after{width:100%;}
+    nav a:hover { color:#fff; }
+
+    .container { max-width:1100px; margin:32px auto; padding:0 20px; }
+
+    .hero { background:var(--card); border-radius:14px; padding:34px; box-shadow:0 12px 28px rgba(0,0,0,0.08); text-align:center; }
+    .hero h2 { font-size:1.9rem; margin-bottom:10px; color:var(--primary); }
+    .hero p { color:var(--muted); }
+    .hero span { font-weight:bold; color:var(--accent); }
+
+    .countdown{ display:flex; justify-content:center; gap:14px; margin-top:22px; flex-wrap:wrap; }
+    .time-box{
+      background:var(--light);
+      border-radius:12px;
+      padding:14px 18px;
+      min-width:90px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.12);
+      animation: float 2.5s ease-in-out infinite;
+    }
+    .time-box span{ display:block; font-size:1.6rem; font-weight:bold; color:var(--accent); }
+    .time-box small{ font-size:0.75rem; color:var(--muted); letter-spacing:1px; }
+
+    @keyframes float{
+      0%{ transform:translateY(0); }
+      50%{ transform:translateY(-6px); }
+      100%{ transform:translateY(0); }
+    }
+
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px; margin-top:32px; }
+
+    .card { background:var(--card); padding:22px; border-radius:16px; box-shadow:0 10px 24px rgba(0,0,0,0.08); text-align:center; transition:transform 0.25s, box-shadow 0.25s; border-top:4px solid transparent; }
+    .card:hover{ transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.12); }
+    .card h3 { margin-bottom:10px; color:var(--primary); }
+
+    .kkr{ border-top-color:var(--kkr); }
+    .mi{ border-top-color:var(--mi); }
+    .csk{ border-top-color:var(--csk); }
+    .rcb{ border-top-color:var(--rcb); }
+    .pbks{ border-top-color:var(--pbks); }
+
+    footer { margin-top:50px; background:var(--primary); color:#e5e7eb; text-align:center; padding:16px; font-size:0.9rem; }
+  </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f5f7fb;
+/* ===== GLOBAL RESPONSIVE FIXES ===== */
+*{
+  box-sizing: border-box;
 }
 
-/* HEADER */
-header {
-  background: linear-gradient(90deg, #0f172a, #1e293b);
-  color: white;
-  padding: 20px;
-  text-align: center;
+body{
+  margin:0;
+  overflow-x:hidden;
 }
 
-nav a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: bold;
+/* Buttons & inputs scale properly */
+button, input{
+  max-width:100%;
 }
 
-/* HOME CARD */
-.welcome {
-  background: white;
-  margin: 30px auto;
-  padding: 25px;
-  border-radius: 15px;
-  max-width: 900px;
-  text-align: center;
+/* ===== MOBILE VIEW ===== */
+@media (max-width: 768px){
+  body{ font-size:15px; }
+
+  header{ padding:16px 12px; }
+  .logo img{ width:36px; height:36px; }
+
+  nav{
+    flex-direction:row;
+    overflow-x:auto;
+    white-space:nowrap;
+    gap:16px;
+    justify-content:flex-start;
+    padding:10px 12px;
+  }
+  nav a{ font-size:0.9rem; }
+
+  .container{ padding:0 12px; }
+
+  .hero{
+    padding:20px 16px;
+    border-radius:12px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .card{
+    padding:18px;
+    border-radius:14px;
+  }
+
+  .card img{
+    max-width:80px;
+    height:auto;
+  }
+
+  h1{ font-size:1.5rem !important; }
+  h2{ font-size:1.25rem !important; }
+  h3{ font-size:1.05rem; }
+
+  p, li{ font-size:0.95rem; line-height:1.45; }
+
+  /* Floating surprise button */
+  #surpriseBtn{
+    bottom:12px;
+    right:12px;
+    padding:10px 14px;
+    font-size:0.85rem;
+  }
+
+  /* Modals */
+  #surpriseModal > div,
+  #privacyModal > div,
+  #accessGate > div{
+    width:94% !important;
+    padding:18px !important;
+  }
+
+  /* Tables scroll nicely */
+  table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
 }
 
-/* TEAMS */
-.teams {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 30px;
-}
+  h1{
+    font-size:1.6rem !important;
+    text-align:center;
+  }
 
-.team {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 8px 20px rgba(0,0,0,.08);
-}
+  h2{
+    font-size:1.2rem !important;
+  }
 
-/* SURPRISE BUTTON */
-#surpriseBtn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #7c3aed;
-  color: white;
-  border: none;
-  padding: 12px 18px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 14px;
-}
+  p{
+    font-size:0.95rem;
+  }
 
-/* SURPRISE MODAL */
-#surpriseBox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-}
+  /* Login box */
+  #accessGate > div{
+    width:92% !important;
+    padding:18px !important;
+  }
 
-#surpriseContent {
-  background: white;
-  max-width: 400px;
-  margin: 10% auto;
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
-}
+  /* Privacy modal */
+  #privacyModal > div{
+    width:92% !important;
+    max-height:85vh;
+    overflow-y:auto;
+  }
 
-/* DELIVERY TRACKER */
-#deliveryBox {
-  display: none;
-  margin-top: 20px;
-}
+  /* Surprise button */
+  #surpriseBtn{
+    bottom:12px;
+    right:12px;
+    padding:10px 14px;
+    font-size:0.9rem;
+  }
 
-.truck {
-  font-size: 40px;
-  animation: truckMove 2.5s infinite alternate ease-in-out;
-}
+  /* Surprise modal */
+  #surpriseModal > div{
+    width:94% !important;
+    padding:18px !important;
+  }
 
-@keyframes truckMove {
-  from { transform: translateX(0); }
-  to { transform: translateX(140px); }
-}
-
-.tracker {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 15px;
-}
-
-.step {
-  padding: 8px 14px;
-  border-radius: 20px;
-  background: #e5e7eb;
-  font-size: 13px;
-}
-
-.step.active {
-  background: #7c3aed;
-  color: white;
-}
-
-.delay {
-  margin-top: 15px;
-  font-size: 14px;
+  /* Tables */
+  table{
+    display:block;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
 }
 </style>
 </head>
-
 <body>
+  <!-- Access Gate -->
+  <div id="accessGate" style="position:fixed; inset:0; background:rgba(15,23,42,0.95); color:#fff; display:flex; align-items:center; justify-content:center; z-index:9999; pointer-events:auto;">
+    <div style="background:#0f172a; padding:28px; border-radius:14px; width:90%; max-width:420px; box-shadow:0 20px 50px rgba(0,0,0,.4); text-align:center;">
+      <h2 style="margin-bottom:8px;">🔐 MPL Access</h2>
+      <p style="opacity:.9; margin-bottom:18px;">Enter your <b>Registration Email</b> and <b>Access Code</b></p>
+      <input id="loginMemberId" type="text" placeholder="Member ID"
+      style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:none;" />
+      <input id="loginCode" type="text" placeholder="Access Code"
+      style="width:100%; padding:10px; margin-bottom:14px; border-radius:8px; border:none;" />
+      <button onclick="checkAccess()" style="width:100%; padding:12px; border:none; border-radius:10px; background:#2563eb; color:#fff; font-weight:bold; cursor:pointer;">Enter</button>
+      <p id="loginMsg" style="margin-top:12px; color:#fca5a5;"></p>
+      <p id="loginRegister" style="margin-top:14px; font-size:.85rem; opacity:.9;">Don’t have an account?<br><a href="https://docs.google.com/forms/d/e/1FAIpQLScxKvkdafgDOi8_5gLJyXM1VpELidMFjaO9EAJtmjCF8_YBcA/viewform" target="_blank" style="color:#60a5fa; font-weight:bold; text-decoration:none;">Register first</a></p>
+    </div>
+  </div>
 
-<header>
-  <h1>Multivity Premier League</h1>
-  <p>Official Cricket Tournament Website • MPL 2026 • Season 4</p>
+  <header>
+    <div class="logo">
+      <img src="mpl-logo.png" alt="MPL Logo" />
+      <h1>Multivity Premier League</h1>
+    </div>
+    <p>Official Cricket Tournament Website • MPL 2026 • Season 4</p>
+  </header>
+
   <nav>
     <a href="#">Home</a>
-    <a href="#">Teams</a>
-    <a href="#">Schedule</a>
-    <a href="#">Points Table</a>
-    <a href="#">History</a>
-    <a href="#">Registration</a>
-    <a href="#">Privacy Policy</a>
+    <a href="#teams">Teams</a>
+    <a href="#schedule2026">Schedule</a>
+    <a href="#points2025">Points Table</a>
+    <a href="#history">History</a>
+    <a href="#registration">Registration</a>
+    <a href="#privacy">Privacy Policy</a>
   </nav>
-</header>
+<button id="surpriseBtn" style="position:fixed; bottom:20px; right:20px; padding:12px 18px; border-radius:999px; border:none; background:#7c3aed; color:#fff; font-weight:600; box-shadow:0 10px 25px rgba(0,0,0,.25); cursor:pointer;">🎁 Surprise</button>
 
-<div class="welcome">
-  <h2>Welcome to <span style="color:#2563eb">MPL – Multivity Premier League</span></h2>
-  <p>Where talent meets passion and champions are made.</p>
-</div>
+  <div class="container">
+    <section class="hero">
+      <h2>Welcome to <span>MPL – Multivity Premier League</span></h2>
+      <p>Where talent meets passion and champions are made.</p>
+      <div id="countdown" style="margin-top:20px; font-size:1.2rem; font-weight:bold; color:var(--accent);"></div>
+    </section>
 
-<div class="teams">
-  <div class="team">KKR<br>Kolkata Knight Riders</div>
-  <div class="team">MI<br>Mumbai Indians</div>
-  <div class="team">CSK<br>Chennai Super Kings</div>
-  <div class="team">RCB<br>Royal Challengers Bengaluru</div>
-</div>
+    <section id="teams" class="grid">
+      <div class="card kkr">
+        <img src="KKR.jpeg" alt="KKR Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🟣 KKR</h3>
+        <p>Kolkata Knight Riders</p>
+        <a href="#kkr">View Team →</a>
+      </div>
+      <div class="card mi">
+        <img src="MI.webp" alt="MI Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🔵 MI</h3>
+        <p>Mumbai Indians</p>
+        <a href="#mi">View Team →</a>
+      </div>
+      <div class="card csk">
+        <img src="CSK.webp" alt="CSK Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🟡 CSK</h3>
+        <p>Chennai Super Kings</p>
+        <a href="#csk">View Team →</a>
+      </div>
+      <div class="card rcb">
+        <img src="RCB.png" alt="RCB Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🔴 RCB</h3>
+        <p>Royal Challengers Bengaluru</p>
+        <a href="#rcb">View Team →</a>
+      </div>
+      <div class="card pbks">
+        <img src="PBKS.png" alt="PBKS Logo" style="width:100px; margin-bottom:10px;" />
+        <h3>🌸 PBKS</h3>
+        <p>Punjab Kings</p>
+        <a href="#pbks">View Team →</a>
+      </div>
+    </section>
 
-<button id="surpriseBtn" onclick="openSurprise()">🎁 Surprise</button>
+    <section class="hero" id="kkr">
+      <h2>KKR Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Ajinkya Rahane</li>
+        <li>Venkatesh Iyer</li>
+        <li>Prabhsimran Singh</li>
+        <li>Sunil Narine</li>
+        <li>Varun Chakravarthy</li>
+        <li>Rashid Khan</li>
+        <li>Mitchell Starc</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Ravichandran Ashwin</p>
+    </section>
+    <section class="hero" id="mi">
+      <h2>MI Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Rohit Sharma</li>
+        <li>Quinton De Kock</li>
+        <li>Shivam Dube</li>
+        <li>Mitchell Santner</li>
+        <li>Pat Cummins</li>
+        <li>Trent Boult</li>
+        <li>Jasprit Bumrah</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Liam Livingstone</p>
+    </section>
+    <section class="hero" id="csk">
+      <h2>CSK Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Ruturaj Gaikwad</li>
+        <li>Suryakumar Yadav</li>
+        <li>MS Dhoni</li>
+        <li>Ravindra Jadeja</li>
+        <li>Matheesha Pathirana</li>
+        <li>Will Jacks</li>
+        <li>Arshdeep Singh</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Marco Jansen</p>
+    </section>
+    <section class="hero" id="rcb">
+      <h2>RCB Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Phil Salt</li>
+        <li>Virat Kohli</li>
+        <li>Hardik Pandya</li>
+        <li>Andre Russell</li>
+        <li>Krunal Pandya</li>
+        <li>Bhuvneshwar Kumar</li>
+        <li>Josh Hazlewood</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Rajat Patidar</p>
+    </section>
+    <section class="hero" id="pbks">
+      <h2>PBKS Squad</h2>
+      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
+      <ul>
+        <li>Shreyas Iyer</li>
+        <li>K. L. Rahul</li>
+        <li>Marcus Stoinis</li>
+        <li>Glenn Maxwell</li>
+        <li>Rinku Singh</li>
+        <li>Yuzvendra Chahal</li>
+        <li>Harshit Rana</li>
+      </ul>
+      <p><strong>Impact Player:</strong> Rachin Ravindra</p>
+    </section>
 
-<div id="surpriseBox">
-  <div id="surpriseContent">
-    <h3>Choose your surprise</h3>
-    <button onclick="selectSurprise('Papya Wars')">Papya Wars</button>
-    <button onclick="selectSurprise('Papya Endgame')">Papya Endgame</button>
+    <section class="hero" id="schedule2026">
+      <h2>📅 MPL 2026 Match Schedule</h2>
+      <p><strong>Coming Soon…</strong></p>
+      <p>The official fixtures, venues, and match timings for <strong>MPL 2026 – Season 4</strong> will be announced shortly.</p>
+    </section>
 
-    <div id="deliveryBox">
-      <div class="truck">🚚</div>
+    <section class="hero" id="registration">
+  <h2>📝 MPL 2026 Registration <span id="regBadge" style="margin-left:8px; padding:4px 10px; border-radius:999px; font-size:.75rem; background:#fde68a; color:#92400e; vertical-align:middle;">Limited Slots</span></h2>
+  <p id="regStatus">Register now to be a part of the Multivity Premier League</p>
+  <div id="regAction">
+    <a id="regLink" href="https://docs.google.com/forms/d/e/1FAIpQLScxKvkdafgDOi8_5gLJyXM1VpELidMFjaO9EAJtmjCF8_YBcA/viewform" target="_blank" style="display:inline-block; margin-top:18px;">
+      <button id="regBtn" style="padding:14px 22px; background:var(--accent); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:bold; cursor:pointer;">Click here for Registration</button>
+    </a>
+    <p id="regMsg" style="margin-top:12px; color:var(--muted); font-size:.9rem;">Opens Google Form in a new tab</p>
+  </div>
+</section>
 
-      <div class="tracker">
-        <div class="step active">📦 Packed</div>
-        <div class="step">🚛 Shipped</div>
-        <div class="step">📍 Out for delivery</div>
+    <section class="hero" id="schedule2025">
+      <h2>📜 MPL 2025 Match Schedule & Results</h2>
+      <p>Season 3 fixtures and outcomes</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>🏏 League Matches</h3>
+        <ul>
+          <li>KKR vs MI (16 Mar 2025) – MI won by 38 runs</li>
+          <li>CSK vs RCB (18 Mar 2025) – RCB won by 48 runs</li>
+          <li>PBKS vs KKR (19 Mar 2025) – PBKS won by 3 runs</li>
+          <li>MI vs CSK (20 Mar 2025) – CSK won by 1 wicket</li>
+          <li>RCB vs PBKS (21 Mar 2025) – PBKS won by 16 runs</li>
+          <li>PBKS vs RCB (22 Mar 2025) – RCB won by 1 wicket</li>
+          <li>PBKS vs MI (23 Mar 2025) – MI won by 1 wicket</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🏆 Final</h3>
+        <p><strong>MI vs RCB</strong></p>
+        <p>26 March 2025</p>
+        <p><strong>Winner:</strong> RCB (won by 3 wickets)</p>
+      </div>
+    </section>
+
+    <section class="hero" id="season2025">
+      <h2>🏏 MPL 2025 – Season 3 Highlights</h2>
+      <p>A memorable and competitive season of the Multivity Premier League</p>
+    </section>
+
+    <section class="grid" id="points2025">
+      <div class="card">
+        <h3>📊 MPL 2025 Points Table</h3>
+        <table style="width:100%; border-collapse:collapse; text-align:center;">
+          <thead>
+            <tr style="background:#e5e7eb;">
+              <th style="padding:8px; border:1px solid #ccc;">Rank</th>
+              <th style="padding:8px; border:1px solid #ccc;">Team</th>
+              <th style="padding:8px; border:1px solid #ccc;">Points</th>
+              <th style="padding:8px; border:1px solid #ccc;">Run Rate (RR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">1</td>
+              <td style="padding:8px; border:1px solid #ccc;">PBKS</td>
+              <td style="padding:8px; border:1px solid #ccc;">4</td>
+              <td style="padding:8px; border:1px solid #ccc;">+4.75</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">RCB</td>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">+8</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">3</td>
+              <td style="padding:8px; border:1px solid #ccc;">MI</td>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">+1</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">4</td>
+              <td style="padding:8px; border:1px solid #ccc;">CSK</td>
+              <td style="padding:8px; border:1px solid #ccc;">2</td>
+              <td style="padding:8px; border:1px solid #ccc;">-4</td>
+            </tr>
+            <tr>
+              <td style="padding:8px; border:1px solid #ccc;">5</td>
+              <td style="padding:8px; border:1px solid #ccc;">KKR</td>
+              <td style="padding:8px; border:1px solid #ccc;">0</td>
+              <td style="padding:8px; border:1px solid #ccc;">-10.25</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px;"><em>Top 3 teams qualified for playoffs</em></p>
+      </div>
+    </section>
+
+    <section class="hero" id="history">
+      <h2>📜 MPL Season History</h2>
+      <p>Champions of the Multivity Premier League</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>🥇 MPL Season 1</h3>
+        <p><strong>Champion:</strong> PBKS</p>
+      </div>
+      <div class="card">
+        <h3>🥇 MPL Season 2</h3>
+        <p><strong>Champion:</strong> CSK</p>
+      </div>
+      <div class="card">
+        <h3>🥇 MPL Season 3</h3>
+        <p><strong>Champion:</strong> RCB</p>
+      </div>
+    </section>
+
+    <section class="hero" id="awards2025">
+      <h2>🏆 MPL 2025 Awards (Season 3)</h2>
+      <p>Celebrating the best performances of the season</p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>🟠 Orange Cap</h3>
+        <p><strong>Marcus Stoinis</strong></p>
+        <p>Most Runs – 171</p>
       </div>
 
-      <div class="delay">
-        YOUR PARCEL WILL BE DELIVERED AT <b>2 JANUARY 2026</b><br>
-        <i>SORRY FOR THE INCONVENIENCE</i>
+      <div class="card">
+        <h3>🟣 Purple Cap</h3>
+        <p><strong>Glenn Maxwell</strong></p>
+        <p>Most Wickets – 16</p>
       </div>
+
+      <div class="card">
+        <h3>🏏 Best Batting Team</h3>
+        <p><strong>Mumbai Indians (MI)</strong></p>
+        <p>Highest Team Runs – 459</p>
+      </div>
+
+      <div class="card">
+        <h3>🎯 Best Bowling Team</h3>
+        <p><strong>Punjab Kings (PBKS)</strong></p>
+        <p>Most Team Wickets – 22</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 Multivity Premier League (MPL) • All Rights Reserved
+  </footer>
+
+  <!-- PRIVACY CONSENT MODAL -->
+  <div id="privacyModal" style="position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; align-items:center; justify-content:center; z-index:10000; pointer-events:auto;">
+    <div style="background:#ffffff; padding:26px; border-radius:14px; max-width:520px; width:90%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+      <h2 style="margin-bottom:10px;">Privacy Policy</h2>
+      <p style="font-size:0.95rem; color:#475569; line-height:1.5;">
+        By using the MPL Official Website, you agree that basic, non-personal data
+        such as device type and visit statistics may be collected for improving
+        the website experience. No sensitive personal data is sold or misused.
+      </p>
+      <button onclick="acceptPrivacy()" style="margin-top:18px; padding:12px 22px; background:#2563eb; color:#fff; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">I Agree</button>
+    </div>
+  </div>
+
+  <section class="hero" id="privacy">
+    <h2>🔐 Privacy Policy</h2>
+    <p>Your privacy is important to us.</p>
+    <ul style="text-align:left; max-width:700px; margin:20px auto; color:#475569;"><li><strong>You have now become an official and Digital Member of Late Multivty.</strong> Please ensure that you follow all the rules strictly.</li></ul>
+  </section>
+
+<script>
+// ===== REGISTRATION AUTO CLOSE LOGIC =====
+const REG_CLOSE_DATE = new Date('2025-12-31T23:59:59');
+
+function checkRegistrationStatus(){
+  const now = new Date();
+  const status = document.getElementById('regStatus');
+  const action = document.getElementById('regAction');
+  const badge = document.getElementById('regBadge');
+
+  if(now > REG_CLOSE_DATE){
+    status.textContent = '🚫 Registration Closed';
+    action.innerHTML = '<p style="margin-top:16px; font-weight:bold; color:#dc2626;">Registrations for MPL 2026 are now closed.</p>';
+    badge.textContent = 'Closed';
+    badge.style.background = '#fee2e2';
+    badge.style.color = '#991b1b';
+  }
+}
+
+checkRegistrationStatus();
+
+// ===== MEMBER ID + ACCESS CODE LOGIN (FRONTEND ONLY) =====
+function checkAccess(){
+  const memberId = document.getElementById('loginMemberId').value.trim();
+  const code = document.getElementById('loginCode').value.trim();
+  const msg = document.getElementById('loginMsg');
+
+  if(!memberId || !code){
+    msg.textContent = "Please enter Member ID and Access Code";
+    return;
+  }
+
+  if(memberId.startsWith("MPL-") && code.startsWith("MPL-")){
+    localStorage.setItem('mpl_access','granted');
+    document.getElementById('accessGate').style.display = 'none';
+  } else {
+    msg.textContent = "Invalid Member ID or Access Code";
+  }
+}
+
+function acceptPrivacy(){
+  localStorage.setItem('mpl_privacy_accepted','yes');
+  document.getElementById('privacyModal').style.display='none';
+  document.getElementById('accessGate').style.pointerEvents='auto';
+}
+
+window.addEventListener('load',()=>{
+  if(localStorage.getItem('mpl_privacy_accepted')==='yes'){
+    document.getElementById('privacyModal').style.display='none';
+  }
+  if(localStorage.getItem('mpl_access')==='granted'){
+    document.getElementById('accessGate').style.display='none';
+  }
+});
+</script>
+
+<!-- Surprise Page / Modal -->
+<div id="surpriseModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); z-index:12000; align-items:center; justify-content:center;">
+  <div style="background:#0f172a; color:#e5e7eb; width:min(92%,700px); border-radius:16px; padding:24px; box-shadow:0 30px 80px rgba(0,0,0,.5);">
+    <h2 style="font-size:1.4rem; margin-bottom:12px;">A Surprise for Multivity Members 🎉</h2>
+    <p style="line-height:1.6; color:#cbd5f5;">
+      5 years ago our honourable Multivity member <b>"Papya"</b> got snapped due to the Avengers mod downloaded by the President.
+      As a tribute, we are sending parcels to every Multivity member.
+      <br/><br/>Please choose which one you want to take:
+    </p>
+
+    <div id="surpriseChoices" style="display:flex; gap:12px; margin-top:18px; flex-wrap:wrap;">
+      <button class="choiceBtn" data-choice="Papya Wars" style="flex:1; min-width:180px; padding:14px; border-radius:12px; border:none; background:#ef4444; color:white; font-weight:600; cursor:pointer;">Papya Wars</button>
+      <button class="choiceBtn" data-choice="Papya Endgame" style="flex:1; min-width:180px; padding:14px; border-radius:12px; border:none; background:#22c55e; color:white; font-weight:600; cursor:pointer;">Papya Endgame</button>
+    </div>
+
+    <div id="surpriseMsg" style="display:none; margin-top:18px; padding:16px; border-radius:12px; background:#020617; color:#a7f3d0;">
+  <p id="surpriseStatusText" style="margin-bottom:12px;">📦 Status: Processing your parcel</p>
+  <div style="width:100%; background:#1e293b; border-radius:999px; overflow:hidden; height:10px;">
+    <div id="trackerBar" style="width:0%; height:100%; background:linear-gradient(90deg,#22c55e,#4ade80); transition:width 2s ease;"></div>
+  </div>
+  <p style="margin-top:12px; font-size:0.9rem; color:#cbd5f5;">
+    ⚠️ Update: Due to unexpected logistical delays, parcel delivery has been rescheduled. Thank you for your patience.
+  </p>
+</div>
+
+    <div style="text-align:right; margin-top:18px;">
+      <button id="closeSurprise" style="background:transparent; color:#93c5fd; border:none; cursor:pointer;">Close</button>
     </div>
   </div>
 </div>
 
 <script>
-function openSurprise() {
-  document.getElementById("surpriseBox").style.display = "block";
-}
+// Surprise feature logic
+const surpriseBtn = document.getElementById('surpriseBtn');
+const surpriseModal = document.getElementById('surpriseModal');
+const closeSurprise = document.getElementById('closeSurprise');
+const surpriseMsg = document.getElementById('surpriseMsg');
 
-function selectSurprise(choice) {
-  localStorage.setItem("mpl_surprise", choice);
-  document.getElementById("deliveryBox").style.display = "block";
+surpriseBtn.addEventListener('click', ()=>{
+  surpriseModal.style.display = 'flex';
+  surpriseMsg.style.display = 'none';
+});
 
-  const steps = document.querySelectorAll(".step");
-  steps.forEach(s => s.classList.remove("active"));
+closeSurprise.addEventListener('click', ()=>{
+  surpriseModal.style.display = 'none';
+});
 
-  steps[0].classList.add("active");
-  setTimeout(() => steps[1].classList.add("active"), 900);
-  setTimeout(() => steps[2].classList.add("active"), 1800);
-}
+Array.from(document.getElementsByClassName('choiceBtn')).forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    surpriseMsg.style.display = 'block';
+    const bar = document.getElementById('trackerBar');
+    bar.style.width = '65%';
+  });
+});
 </script>
-
 </body>
 </html>
