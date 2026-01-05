@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <link rel="stylesheet" href="assets/style.css?v=2026.01">
-  <script src="assets/app.js?v=2026.01" defer></script>
   <meta http-equiv="Cache-Control" content="max-age=0, no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -343,5 +342,28 @@
     <p>Your privacy is important to us.</p>
     <ul style="text-align:left; max-width:700px; margin:20px auto; color:#475569;"><li><strong>You have now become an official and Digital Member of Late Multivty.</strong> Please ensure that you follow all the rules strictly.</li></ul>
   </section>
+  <script>
+  // PRIVACY FIX
+  function acceptPrivacy() {
+    const modal = document.getElementById("privacyModal");
+    if (modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  // LOGIN FIX (TEMP WORKING)
+  function checkAccess() {
+    const memberId = document.getElementById("loginMemberId").value.trim();
+    const code = document.getElementById("loginCode").value.trim();
+    const msg = document.getElementById("loginMsg");
+
+    if (!memberId || !code) {
+      msg.textContent = "Please enter Member ID and Access Code";
+      return;
+    }
+
+    document.getElementById("accessGate").style.display = "none";
+  }
+</script>
 </body>
 </html>
