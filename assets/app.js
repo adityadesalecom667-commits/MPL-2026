@@ -1,3 +1,25 @@
+// ===== PRIVACY ACCEPT FIX =====
+function acceptPrivacy() {
+  const modal = document.getElementById("privacyModal");
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
+
+// ===== ACCESS GATE LOGIN (TEMP SAFE) =====
+function checkAccess() {
+  const memberId = document.getElementById("loginMemberId").value.trim();
+  const code = document.getElementById("loginCode").value.trim();
+  const msg = document.getElementById("loginMsg");
+
+  if (!memberId || !code) {
+    msg.textContent = "Please enter Member ID and Access Code";
+    return;
+  }
+
+  // TEMP bypass (replace later with Sheets)
+  document.getElementById("accessGate").style.display = "none";
+}
 <script>
 // ===== REGISTRATION AUTO CLOSE LOGIC =====
 const REG_CLOSE_DATE = new Date('2025-12-31T23:59:59');
@@ -61,4 +83,6 @@ function acceptPrivacy() {
   }
 }
 </script>
+<script src="assets/app.js?v=2026.01" defer></script>
+
 
