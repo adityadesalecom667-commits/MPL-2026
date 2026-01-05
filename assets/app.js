@@ -53,3 +53,12 @@ window.addEventListener('load',()=>{
   }
 });
 </script>
+<script>
+function acceptPrivacy() {
+  const privacy = document.getElementById("privacyModal");
+  if (privacy) {
+    privacy.style.display = "none";
+  }
+}
+</script>
+
