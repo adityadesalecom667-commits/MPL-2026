@@ -640,28 +640,10 @@ window.addEventListener('load',()=>{
 </script>
   <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAT0nvHF7EL7qFQAo8nQ34MIMP8YjcNARw",
-    authDomain: "mpl-2026.firebaseapp.com",
-    projectId: "mpl-2026",
-    storageBucket: "mpl-2026.firebasestorage.app",
-    messagingSenderId: "755374470782",
-    appId: "1:755374470782:web:3be2e0b293e7476bcbca2f"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  console.log("🔥 Firebase connected successfully");
-</script>
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAT0nvHF7EL7qFQAo8nQ34MIMP8YjcNARw",
+   apiKey: "AIzaSyAT0nvHF7EL7qFQAo8nQ34MIMP8YjcNARw",
     authDomain: "mpl-2026.firebaseapp.com",
     projectId: "mpl-2026",
     storageBucket: "mpl-2026.firebasestorage.app",
@@ -669,29 +651,19 @@ window.addEventListener('load',()=>{
     appId: "1:755374470782:web:3be2e0b293e7476bcbca2f"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
   console.log("🔥 Firebase connected successfully");
 
-  // 🔹 READ TEST USER
   const ref = doc(db, "users", "TEST-USER");
   const snap = await getDoc(ref);
 
   if (snap.exists()) {
-    console.log("✅ User data from Firebase:", snap.data());
+    console.log("✅ User data:", snap.data());
   } else {
     console.log("❌ User not found");
   }
 </script>
 </body>
-const firebaseConfig = {
-  apiKey: "AIzaSyAT0nvHF7EL7qFQAo8nQ34MIMP8YjcNARw",
-  authDomain: "mpl-2026.firebaseapp.com",
-  projectId: "mpl-2026",
-  storageBucket: "mpl-2026.firebasestorage.app",
-  messagingSenderId: "755374470782",
-  appId: "1:755374470782:web:3be2e0b293e7476bcbca2f"
-};
 </html>
