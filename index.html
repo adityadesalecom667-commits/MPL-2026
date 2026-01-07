@@ -656,6 +656,18 @@ window.addEventListener('load',()=>{
 
   console.log("🔥 Firebase connected successfully");
 </script>
+  <script type="module">
+  import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const ref = doc(db, "users", "TEST-USER");
+  const snap = await getDoc(ref);
+
+  if (snap.exists()) {
+    console.log("User data from Firebase:", snap.data());
+  } else {
+    console.log("User not found");
+  }
+</script>
 </body>
 const firebaseConfig = {
   apiKey: "AIzaSyAT0nvHF7EL7qFQAo8nQ34MIMP8YjcNARw",
