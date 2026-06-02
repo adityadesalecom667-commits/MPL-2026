@@ -56,7 +56,6 @@
     .rcb{ border-top-color:var(--rcb); }
     .pbks{ border-top-color:var(--pbks); }
 
-    /* Custom styles for Match Center & Stats Tables */
     .mpl-table-container { overflow-x: auto; margin-top: 15px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
     .mpl-table { width:100%; border-collapse:collapse; text-align:center; background: var(--card); }
     .mpl-table th { background: var(--primary); color: #fff; padding: 12px 8px; font-weight: 600; font-size: 0.95rem; }
@@ -80,32 +79,21 @@
 
     footer { margin-top:50px; background:var(--primary); color:#e5e7eb; text-align:center; padding:16px; font-size:0.9rem; }
 
-    /* ===== MOBILE VIEW ===== */
     @media (max-width: 768px){
       body{ font-size:15px; }
       header{ padding:16px 12px; }
       .logo img{ width:36px; height:36px; }
-
-      nav{
-        flex-direction:row;
-        overflow-x:auto;
-        white-space:nowrap;
-        gap:16px;
-        justify-content:flex-start;
-        padding:10px 12px;
-      }
+      nav{ flex-direction:row; overflow-x:auto; white-space:nowrap; gap:16px; justify-content:flex-start; padding:10px 12px; }
       nav a{ font-size:0.9rem; }
       .container{ padding:0 12px; }
       .hero{ padding:20px 16px; border-radius:12px; }
       .grid{ grid-template-columns:1fr; gap:16px; }
       .card{ padding:18px; border-radius:14px; }
       .card img{ max-width:80px; height:auto; }
-
       h1{ font-size:1.5rem !important; }
       h2{ font-size:1.35rem !important; }
       h3{ font-size:1.05rem; }
       p, li{ font-size:0.95rem; line-height:1.45; }
-
       #accessGate > div, #privacyModal > div { width:94% !important; padding:18px !important; }
     }
   </style>
@@ -117,24 +105,21 @@
     <div style="background:#ffffff; padding:26px; border-radius:14px; max-width:520px; width:90%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
       <h2 style="margin-bottom:10px;">Privacy Policy</h2>
       <p style="font-size:0.95rem; color:#475569; line-height:1.5;">
-        By using the MPL Official Website, you agree that basic, non-personal data
-        such as device type and visit statistics may be collected for improving
-        the website experience. No sensitive personal data is sold or misused.
+        By using the MPL Official Website, you agree that basic, non-personal data may be collected for website analytics.
       </p>
       <button onclick="acceptPrivacy()" style="margin-top:18px; padding:12px 22px; background:#2563eb; color:#fff; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">I Agree</button>
     </div>
   </div>
 
-  <!-- Access Gate -->
+  <!-- Access Gate Security -->
   <div id="accessGate" style="position:fixed; inset:0; background:rgba(15,23,42,0.95); color:#fff; display:flex; align-items:center; justify-content:center; z-index:9999; pointer-events:none; display:none;">
     <div style="background:#0f172a; padding:28px; border-radius:14px; width:90%; max-width:420px; box-shadow:0 20px 50px rgba(0,0,0,.4); text-align:center; pointer-events:auto;">
       <h2 style="margin-bottom:8px;">🔐 MPL Access</h2>
-      <p style="opacity:.9; margin-bottom:18px;">Enter your <b>Registration Email</b> and <b>Access Code</b></p>
+      <p style="opacity:.9; margin-bottom:18px;">Enter your Registration Credentials</p>
       <input id="loginMemberId" type="text" placeholder="Member ID" style="width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:none;" />
       <input id="loginCode" type="text" placeholder="Access Code" style="width:100%; padding:10px; margin-bottom:14px; border-radius:8px; border:none;" />
       <button onclick="checkAccess()" style="width:100%; padding:12px; border:none; border-radius:10px; background:#2563eb; color:#fff; font-weight:bold; cursor:pointer;">Enter</button>
       <p id="loginMsg" style="margin-top:12px; color:#fca5a5;"></p>
-      <p id="loginRegister" style="margin-top:14px; font-size:.85rem; opacity:.9;">Don’t have an account?<br><a href="https://docs.google.com/forms/d/e/1FAIpQLScxKvkdafgDOi8_5gLJyXM1VpELidMFjaO9EAJtmjCF8_YBcA/viewform" target="_blank" style="color:#60a5fa; font-weight:bold; text-decoration:none;">Register first</a></p>
     </div>
   </div>
 
@@ -153,188 +138,49 @@
     <a href="#points2026">Points Table</a>
     <a href="#stats-leaderboards">Stats</a>
     <a href="#history">History</a>
-    <a href="#registration">Registration</a>
     <a href="#privacy">Privacy Policy</a>
   </nav>
 
-  <!-- Announcement Banner -->
-  <div id="announcementBanner" style="background: linear-gradient(90deg,#2563eb,#1e40af); color:#ffffff; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:0.95rem;">
-    <span>📢 <strong>Announcement:</strong> MPL Season 4 is officially LIVE! Match 1 concluded on 1st June 2026.</span>
-    <button onclick="closeAnnouncement()" style="background:rgba(255,255,255,0.2); border:none; color:#fff; padding:6px 10px; border-radius:6px; cursor:pointer; font-size:0.85rem;">✖</button>
-  </div>
-
   <div class="container">
     
-    <!-- Match Center Section -->
+    <!-- Match Center (Live Results Widget) -->
     <section class="hero" id="match-center">
       <h2>🏁 Match Center (Season 4)</h2>
-      <p>All league fixtures are high-stakes 5-over shootouts.</p>
+      <p>Latest match scorecards from the 5-over dynamic shootouts.</p>
       <div class="match-center-grid">
-        <!-- Match 1 Card -->
+        <!-- Match 1 -->
         <div class="match-box">
           <span class="match-tag tag-result">Match 1 • Result</span>
-          <div class="team-row">
-            <span>RCB</span>
-            <span>11 All Out (3.3 ov)</span>
-          </div>
-          <div class="team-row winner">
-            <span>MI 🏆</span>
-            <span>13/3 (1.4 ov)</span>
-          </div>
+          <div class="team-row"><span>RCB</span><span>11 All Out (3.3 ov)</span></div>
+          <div class="team-row winner"><span>MI 🏆</span><span>13/3 (1.4 ov)</span></div>
           <hr />
-          <div class="match-footer">
-            <strong>MI won by 7 wickets</strong><br />
-            POTM: Kieron Pollard (3/5 & 0*)
-          </div>
+          <div class="match-footer"><strong>MI won by 7 wickets</strong><br />POTM: Kieron Pollard</div>
         </div>
-        <!-- Match 2 Card -->
+        <!-- Match 2 -->
+        <div class="match-box">
+          <span class="match-tag tag-result">Match 2 • Result</span>
+          <div class="team-row"><span>CSK</span><span>23 All Out (4.1 ov)</span></div>
+          <div class="team-row winner"><span>KKR 🏆</span><span>25/5 (3.2 ov)</span></div>
+          <hr />
+          <div class="match-footer"><strong>KKR won by 5 wickets</strong><br />POTM: Varun Chakravarthy (4/1)</div>
+        </div>
+        <!-- Match 3 Upcoming -->
         <div class="match-box live">
-          <span class="match-tag tag-live">Match 2 • Today</span>
+          <span class="match-tag tag-live">Match 3 • Up Next</span>
           <div class="team-row" style="font-weight: bold; margin: 15px 0;">
-            <span style="color: var(--csk);">CSK</span>
+            <span style="color: var(--pbks);">PBKS</span>
             <span style="color: var(--muted); font-weight: normal;">vs</span>
-            <span style="color: var(--kkr);">KKR</span>
+            <span style="color: var(--mi);">MI</span>
           </div>
           <hr />
-          <div class="match-footer">
-            <strong>Date:</strong> 2 June 2026<br />
-            Fixture locked. Innings update coming soon.
-          </div>
+          <div class="match-footer"><strong>Date:</strong> 3 June 2026<br />Innings updates live post-match.</div>
         </div>
       </div>
     </section>
 
-    <!-- Suggestion Box -->
-    <section class="hero" id="suggestions">
-      <h2>💡 Suggestion Box</h2>
-      <p style="margin-bottom: 15px;">Help us improve MPL by sharing your ideas.</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdgOJ8v18Ckv7yRCkWst1vfuZh55ZXQuCq_W7_XKh8PvmchQ/viewform" target="_blank">
-        <button style="padding:14px 22px; background:#2563eb; color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:bold; cursor:pointer;">Submit a Suggestion</button>
-      </a>
-      <p style="margin-top:14px; font-size:0.85rem; color:#64748b;">Suggestions are reviewed by the MPL core team.</p>
-    </section>
-
-    <!-- Teams Grid Section -->
-    <section id="teams" class="grid">
-      <div class="card kkr">
-        <img src="KKR.jpeg" alt="KKR Logo" style="width:100px; margin-bottom:10px;" onerror="this.style.display='none'"/>
-        <h3>🟣 KKR</h3>
-        <p>Kolkata Knight Riders</p>
-        <a href="#kkr" style="color: var(--accent); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 8px;">View Team →</a>
-      </div>
-      <div class="card mi">
-        <img src="MI.webp" alt="MI Logo" style="width:100px; margin-bottom:10px;" onerror="this.style.display='none'"/>
-        <h3>🔵 MI</h3>
-        <p>Mumbai Indians</p>
-        <a href="#mi" style="color: var(--accent); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 8px;">View Team →</a>
-      </div>
-      <div class="card csk">
-        <img src="CSK.webp" alt="CSK Logo" style="width:100px; margin-bottom:10px;" onerror="this.style.display='none'"/>
-        <h3>🟡 CSK</h3>
-        <p>Chennai Super Kings</p>
-        <a href="#csk" style="color: var(--accent); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 8px;">View Team →</a>
-      </div>
-      <div class="card rcb">
-        <img src="RCB.png" alt="RCB Logo" style="width:100px; margin-bottom:10px;" onerror="this.style.display='none'"/>
-        <h3>🔴 RCB</h3>
-        <p>Royal Challengers Bengaluru</p>
-        <a href="#rcb" style="color: var(--accent); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 8px;">View Team →</a>
-      </div>
-      <div class="card pbks">
-        <img src="PBKS.png" alt="PBKS Logo" style="width:100px; margin-bottom:10px;" onerror="this.style.display='none'"/>
-        <h3>🌸 PBKS</h3>
-        <p>Punjab Kings</p>
-        <a href="#pbks" style="color: var(--accent); text-decoration: none; font-weight: bold; display: inline-block; margin-top: 8px;">View Team →</a>
-      </div>
-    </section>
-
-    <!-- Squad Details Cards -->
-    <section class="hero" id="kkr">
-      <h2>KKR Squad</h2>
-      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
-      <ul style="list-style-type: none; margin: 15px 0; line-height: 1.8;">
-        <li>Ajinkya Rahane</li><li>Venkatesh Iyer</li><li>Prabhsimran Singh</li><li>Sunil Narine</li><li>Varun Chakravarthy</li><li>Rashid Khan</li><li>Mitchell Starc</li>
-      </ul>
-      <p><strong>Impact Player:</strong> Ravichandran Ashwin</p>
-    </section>
-
-    <section class="hero" id="mi">
-      <h2>MI Squad</h2>
-      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
-      <ul style="list-style-type: none; margin: 15px 0; line-height: 1.8;">
-        <li>Rohit Sharma</li><li>Quinton De Kock</li><li>Shivam Dube</li><li>Mitchell Santner</li><li>Pat Cummins</li><li>Trent Boult</li><li>Jasprit Bumrah</li>
-      </ul>
-      <p><strong>Impact Player:</strong> Liam Livingstone</p>
-    </section>
-
-    <section class="hero" id="csk">
-      <h2>CSK Squad</h2>
-      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
-      <ul style="list-style-type: none; margin: 15px 0; line-height: 1.8;">
-        <li>Ruturaj Gaikwad</li><li>Suryakumar Yadav</li><li>MS Dhoni</li><li>Ravindra Jadeja</li><li>Matheesha Pathirana</li><li>Will Jacks</li><li>Arshdeep Singh</li>
-      </ul>
-      <p><strong>Impact Player:</strong> Marco Jansen</p>
-    </section>
-
-    <section class="hero" id="rcb">
-      <h2>RCB Squad</h2>
-      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
-      <ul style="list-style-type: none; margin: 15px 0; line-height: 1.8;">
-        <li>Phil Salt</li><li>Virat Kohli</li><li>Hardik Pandya</li><li>Andre Russell</li><li>Krunal Pandya</li><li>Bhuvneshwar Kumar</li><li>Josh Hazlewood</li>
-      </ul>
-      <p><strong>Impact Player:</strong> Rajat Patidar</p>
-    </section>
-
-    <section class="hero" id="pbks">
-      <h2>PBKS Squad</h2>
-      <p><strong>Captain:</strong> TBD | <strong>Coach:</strong> TBD</p>
-      <ul style="list-style-type: none; margin: 15px 0; line-height: 1.8;">
-        <li>Shreyas Iyer</li><li>K. L. Rahul</li><li>Marcus Stoinis</li><li>Glenn Maxwell</li><li>Rinku Singh</li><li>Yuzvendra Chahal</li><li>Harshit Rana</li>
-      </ul>
-      <p><strong>Impact Player:</strong> Rachin Ravindra</p>
-    </section>
-
-    <!-- Season 4 Schedule Section -->
-    <section class="hero" id="schedule2026">
-      <h2>📅 MPL 2026 Match Schedule (Season 4)</h2>
-      <p style="margin-bottom: 12px;">Refer to the design file <b>"MPL 2026 FINAL SCHEDULE.png"</b> for verified graphics.</p>
-      <div class="mpl-table-container">
-        <table class="mpl-table">
-          <thead>
-            <tr>
-              <th>Match No.</th>
-              <th>Date</th>
-              <th>Fixture</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>1 June 2026</td><td>MI vs RCB (Completed)</td></tr>
-            <tr style="background: #eff6ff; font-weight: bold;"><td>2</td><td>2 June 2026</td><td>CSK vs KKR (Today)</td></tr>
-            <tr><td>3</td><td>3 June 2026</td><td>PBKS vs MI</td></tr>
-            <tr><td>4</td><td>4 June 2026</td><td>RCB vs CSK</td></tr>
-            <tr><td>5</td><td>5 June 2026</td><td>KKR vs PBKS</td></tr>
-            <tr><td>6</td><td>6 June 2026</td><td>MI vs CSK</td></tr>
-            <tr><td>7</td><td>7 June 2026</td><td>RCB vs KKR</td></tr>
-            <tr><td>8</td><td>8 June 2026</td><td>PBKS vs CSK</td></tr>
-            <tr><td>9</td><td>9 June 2026</td><td>MI vs KKR</td></tr>
-            <tr><td>10</td><td>10 June 2026</td><td>RCB vs PBKS</td></tr>
-            <tr style="background: #fffbeb;"><td colspan="3"><b>Playoffs Stage Schedule</b></td></tr>
-            <tr><td>Eliminator</td><td>11 June 2026</td><td>3rd vs 4th Place</td></tr>
-            <tr style="color: var(--muted);"><td>Break Day</td><td>12 June 2026</td><td>Rest / Media Day</td></tr>
-            <tr><td>Qualifier 1</td><td>13 June 2026</td><td>1st vs 2nd Place</td></tr>
-            <tr style="color: var(--muted);"><td>Break Day</td><td>14 June 2026</td><td>Rest / Practice Day</td></tr>
-            <tr><td>Qualifier 2</td><td>15 June 2026</td><td>Loser Q1 vs Winner Eliminator</td></tr>
-            <tr style="color: var(--muted);"><td>Break Day</td><td>16 June 2026</td><td>Final Build-Up</td></tr>
-            <tr style="background: #fef2f2; font-weight: bold; color: var(--rcb);"><td>FINAL</td><td>17 June 2026</td><td>Winner Q1 vs Winner Q2</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Season 4 Live Points Table Section -->
+    <!-- Season 4 Live Points Table -->
     <section class="hero" id="points2026">
       <h2>📊 MPL Season 4 Points Table</h2>
-      <p>Calculated with standard 2-point wins and comprehensive Net Run Rate adjustments.</p>
       <div class="mpl-table-container">
         <table class="mpl-table">
           <thead>
@@ -349,287 +195,93 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="pos-up">
-              <td>1</td>
-              <td>MI</td>
-              <td>1</td>
-              <td>1</td>
-              <td>0</td>
-              <td>2</td>
-              <td>+5.314</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>CSK</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.000</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>KKR</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.000</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>PBKS</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0</td>
-              <td>0.000</td>
-            </tr>
-            <tr class="pos-down">
-              <td>5</td>
-              <td>RCB</td>
-              <td>1</td>
-              <td>0</td>
-              <td>1</td>
-              <td>0</td>
-              <td>-5.314</td>
-            </tr>
+            <tr class="pos-up"><td>1</td><td>MI</td><td>1</td><td>1</td><td>0</td><td>2</td><td>+5.314</td></tr>
+            <tr class="pos-up"><td>2</td><td>KKR</td><td>1</td><td>1</td><td>0</td><td>2</td><td>+1.100</td></tr>
+            <tr><td>3</td><td>PBKS</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0.000</td></tr>
+            <tr class="pos-down"><td>4</td><td>CSK</td><td>1</td><td>0</td><td>1</td><td>0</td><td>-1.100</td></tr>
+            <tr class="pos-down"><td>5</td><td>RCB</td><td>1</td><td>0</td><td>1</td><td>0</td><td>-5.314</td></tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Season 4 Cap Leaderboards Section -->
+    <!-- Leaderboards (Orange and Purple Cap) -->
     <section class="grid" id="stats-leaderboards" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-      <!-- Orange Cap Table -->
+      <!-- Orange Cap Card -->
       <div class="card" style="border-top-color: #ea580c; text-align: left; padding: 18px;">
         <h3 style="text-align: center; margin-bottom: 15px; color: #ea580c;">🟠 Orange Cap (Top 5)</h3>
         <div class="mpl-table-container">
           <table class="mpl-table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>Team</th>
-                <th>Runs</th>
-                <th>SR</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>Runs</th><th>SR</th></tr></thead>
             <tbody>
-              <tr style="font-weight: bold; background: #fff7ed;"><td>1</td><td>Rohit Sharma</td><td>MI</td><td>8</td><td>200.0</td></tr>
-              <tr><td>2</td><td>S. Rutherford</td><td>RCB</td><td>5</td><td>125.0</td></tr>
-              <tr><td>3</td><td>Tilak Varma</td><td>MI</td><td>4</td><td>200.0</td></tr>
-              <tr><td>4</td><td>Harshal Patel</td><td>RCB</td><td>3</td><td>75.0</td></tr>
-              <tr><td>5</td><td>Anuj Rawat</td><td>RCB</td><td>1</td><td>50.0</td></tr>
+              <tr style="font-weight: bold; background: #fff7ed;"><td>1</td><td>Robin Uthappa</td><td>CSK</td><td>10</td><td>125.0</td></tr>
+              <tr><td>2</td><td>Rohit Sharma</td><td>MI</td><td>8</td><td>200.0</td></tr>
+              <tr><td>3</td><td>Venkatesh Iyer</td><td>KKR</td><td>8</td><td>133.3</td></tr>
+              <tr><td>4</td><td>Nitish Rana</td><td>KKR</td><td>8</td><td>133.3</td></tr>
+              <tr><td>5</td><td>S. Rutherford</td><td>RCB</td><td>5</td><td>125.0</td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Purple Cap Table -->
+      <!-- Purple Cap Card -->
       <div class="card" style="border-top-color: #9333ea; text-align: left; padding: 18px;">
         <h3 style="text-align: center; margin-bottom: 15px; color: #9333ea;">🟣 Purple Cap (Top 5)</h3>
         <div class="mpl-table-container">
           <table class="mpl-table">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>Team</th>
-                <th>Wkts</th>
-                <th>Econ</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Rank</th><th>Player</th><th>Team</th><th>Wkts</th><th>Econ</th></tr></thead>
             <tbody>
-              <tr style="font-weight: bold; background: #faf5ff;"><td>1</td><td>Jasprit Bumrah</td><td>MI</td><td>3</td><td>2.00</td></tr>
-              <tr><td>2</td><td>Kieron Pollard</td><td>MI</td><td>3</td><td>5.00</td></tr>
-              <tr><td>3</td><td>M. Ashwin</td><td>MI</td><td>2</td><td>3.00</td></tr>
-              <tr><td>4</td><td>David Willey</td><td>RCB</td><td>2</td><td>9.00</td></tr>
-              <tr><td>5</td><td>Daniel Sams</td><td>MI</td><td>1</td><td>2.00</td></tr>
+              <tr style="font-weight: bold; background: #faf5ff;"><td>1</td><td>V. Chakravarthy</td><td>KKR</td><td>4</td><td>1.00</td></tr>
+              <tr><td>2</td><td>Jasprit Bumrah</td><td>MI</td><td>3</td><td>2.00</td></tr>
+              <tr style="background: #fffbeb;"><td>3</td><td>Mitchell Santner</td><td>CSK</td><td>3</td><td>4.00</td></tr>
+              <tr><td>4</td><td>Kieron Pollard</td><td>MI</td><td>3</td><td>5.00</td></tr>
+              <tr><td>5</td><td>Murugan Ashwin</td><td>MI</td><td>2</td><td>3.00</td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
 
-    <!-- Legacy / Historical Sections below -->
-    <section class="hero" id="registration">
-      <h2>📝 MPL 2026 Registration <span id="regBadge" style="margin-left:8px; padding:4px 10px; border-radius:999px; font-size:.75rem; background:#fee2e2; color:#991b1b; vertical-align:middle;">Closed</span></h2>
-      <p id="regStatus">🚫 Registration Closed</p>
-      <div id="regAction">
-        <p style="margin-top:16px; font-weight:bold; color:#dc2626;">Registrations for MPL 2026 are now closed.</p>
-      </div>
+    <!-- Franchise Teams Index -->
+    <section id="teams" class="grid">
+      <div class="card kkr"><h3>🟣 KKR</h3><p>Kolkata Knight Riders</p></div>
+      <div class="card mi"><h3>🔵 MI</h3><p>Mumbai Indians</p></div>
+      <div class="card csk"><h3>🟡 CSK</h3><p>Chennai Super Kings</p></div>
+      <div class="card rcb"><h3>🔴 RCB</h3><p>Royal Challengers Bengaluru</p></div>
+      <div class="card pbks"><h3>🌸 PBKS</h3><p>Punjab Kings</p></div>
     </section>
 
-    <!-- Historical Season Archives -->
-    <section class="hero" id="schedule2025">
-      <h2>📜 MPL 2025 Match Schedule & Results (Archived)</h2>
-      <p>Season 3 legacy fixtures and outcomes</p>
-    </section>
-
-    <section class="grid">
-      <div class="card">
-        <h3>🏏 League Matches</h3>
-        <ul style="list-style-type: none; text-align: left; padding: 5px; line-height: 1.6;">
-          <li>• KKR vs MI – MI won by 38 runs</li>
-          <li>• CSK vs RCB – RCB won by 48 runs</li>
-          <li>• PBKS vs KKR – PBKS won by 3 runs</li>
-          <li>• MI vs CSK – CSK won by 1 wicket</li>
-          <li>• RCB vs PBKS – PBKS won by 16 runs</li>
-          <li>• PBKS vs RCB – RCB won by 1 wicket</li>
-          <li>• PBKS vs MI – MI won by 1 wicket</li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>🏆 Final</h3>
-        <p style="margin-top: 10px;"><strong>MI vs RCB</strong></p>
-        <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 8px;">26 March 2025</p>
-        <p><strong>Winner:</strong> RCB (won by 3 wickets)</p>
-      </div>
-    </section>
-
-    <section class="hero" id="season2025">
-      <h2>🏏 MPL 2025 – Season 3 Highlights</h2>
+    <!-- Full Schedule Track Section -->
+    <section class="hero" id="schedule2026">
+      <h2>📅 MPL 2026 Schedule (Season 4)</h2>
       <div class="mpl-table-container">
         <table class="mpl-table">
-          <thead>
-            <tr style="background:#e5e7eb;">
-              <th>Rank</th>
-              <th>Team</th>
-              <th>Points</th>
-              <th>Run Rate (RR)</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Match</th><th>Date</th><th>Fixture</th></tr></thead>
           <tbody>
-            <tr><td>1</td><td>PBKS</td><td>4</td><td>+4.75</td></tr>
-            <tr><td>2</td><td>RCB</td><td>2</td><td>+8.00</td></tr>
-            <tr><td>3</td><td>MI</td><td>2</td><td>+1.00</td></tr>
-            <tr><td>4</td><td>CSK</td><td>2</td><td>-4.00</td></tr>
-            <tr><td>5</td><td>KKR</td><td>0</td><td>-10.25</td></tr>
+            <tr><td>1</td><td>1 June 2026</td><td>MI vs RCB (Completed)</td></tr>
+            <tr><td>2</td><td>2 June 2026</td><td>CSK vs KKR (Completed)</td></tr>
+            <tr style="background: #eff6ff; font-weight: bold;"><td>3</td><td>3 June 2026</td><td>PBKS vs MI (Next)</td></tr>
+            <tr><td>4</td><td>4 June 2026</td><td>RCB vs CSK</td></tr>
+            <tr><td>5</td><td>5 June 2026</td><td>KKR vs PBKS</td></tr>
+            <tr><td>6</td><td>6 June 2026</td><td>MI vs CSK</td></tr>
+            <tr><td>7</td><td>7 June 2026</td><td>RCB vs KKR</td></tr>
+            <tr><td>8</td><td>8 June 2026</td><td>PBKS vs CSK</td></tr>
+            <tr><td>9</td><td>9 June 2026</td><td>MI vs KKR</td></tr>
+            <tr><td>10</td><td>10 June 2026</td><td>RCB vs PBKS</td></tr>
           </tbody>
         </table>
       </div>
-      <p style="margin-top:10px; font-size: 0.85rem; color: var(--muted);"><em>Top 3 teams qualified for playoffs</em></p>
-    </section>
-
-    <!-- Historical Awards Box -->
-    <section class="hero" id="awards2025">
-      <h2>🏆 MPL 2025 Awards (Season 3)</h2>
-      <p>Celebrating the best historical performances</p>
-    </section>
-
-    <section class="grid">
-      <div class="card"><h3>🟠 Orange Cap</h3><p><strong>Marcus Stoinis</strong></p><p style="color: var(--muted); font-size: 0.9rem;">Most Runs – 171</p></div>
-      <div class="card"><h3>🟣 Purple Cap</h3><p><strong>Glenn Maxwell</strong></p><p style="color: var(--muted); font-size: 0.9rem;">Most Wickets – 16</p></div>
-      <div class="card"><h3>🏏 Best Batting Team</h3><p><strong>MI</strong></p><p style="color: var(--muted); font-size: 0.9rem;">Highest Team Runs – 459</p></div>
-      <div class="card"><h3>🎯 Best Bowling Team</h3><p><strong>PBKS</strong></p><p style="color: var(--muted); font-size: 0.9rem;">Most Team Wickets – 22</p></div>
-    </section>
-
-    <section class="hero" id="history">
-      <h2>📜 MPL Tournament Hall of Fame</h2>
-      <p>Champions of the Multivity Premier League legacy</p>
-    </section>
-
-    <section class="grid">
-      <div class="card"><h3>🥇 MPL Season 1</h3><p><strong>Champion:</strong> PBKS</p></div>
-      <div class="card"><h3>🥇 MPL Season 2</h3><p><strong>Champion:</strong> CSK</p></div>
-      <div class="card"><h3>🥇 MPL Season 3</h3><p><strong>Champion:</strong> RCB</p></div>
-    </section>
-
-    <section class="hero" id="privacy">
-      <h2>🔐 Privacy Policy</h2>
-      <p>Your privacy is important to us.</p>
-      <ul style="text-align:left; max-width:700px; margin:20px auto; color:#475569; padding-left: 20px;">
-        <li><strong>You have now become an official and Digital Member of Multivity.</strong> Please ensure that you follow all the rules strictly.</li>
-      </ul>
     </section>
 
   </div>
-
-  <footer>
-    © 2026 Multivity Premier League (MPL) • All Rights Reserved
-  </footer>
+  <footer>© 2026 Multivity Premier League (MPL) • All Rights Reserved</footer>
 
   <script>
-    function closeAnnouncement(){
-      localStorage.setItem('mpl_announcement_closed','yes');
-      document.getElementById('announcementBanner').style.display = 'none';
-    }
-
-    window.addEventListener('load', ()=>{
-      if(localStorage.getItem('mpl_announcement_closed') === 'yes'){
-        const banner = document.getElementById('announcementBanner');
-        if(banner) banner.style.display = 'none';
-      }
-    });
-
-    function checkAccess(){
-      const memberId = document.getElementById('loginMemberId').value.trim();
-      const code = document.getElementById('loginCode').value.trim();
-      const msg = document.getElementById('loginMsg');
-
-      if(!memberId || !code){
-        msg.textContent = "Please enter Member ID and Access Code";
-        return;
-      }
-
-      if(memberId.startsWith("MPL-") && code.startsWith("MPL-")){
-        localStorage.setItem('mpl_access','granted');
-        document.getElementById('accessGate').style.display = 'none';
-      } else {
-        msg.textContent = "Invalid Member ID or Access Code";
-      }
-    }
-
-    function acceptPrivacy(){
-      localStorage.setItem('mpl_privacy_accepted','yes');
-      document.getElementById('privacyModal').style.display='none';
-      const gate = document.getElementById('accessGate');
-      if(gate) gate.style.pointerEvents='auto';
-    }
-
+    function closeAnnouncement(){ document.getElementById('announcementBanner').style.display = 'none'; }
+    function acceptPrivacy(){ localStorage.setItem('mpl_privacy_accepted','yes'); document.getElementById('privacyModal').style.display='none'; }
     window.addEventListener('load',()=>{
-      if(localStorage.getItem('mpl_privacy_accepted')==='yes'){
-        document.getElementById('privacyModal').style.display='none';
-      } else {
-        const gate = document.getElementById('accessGate');
-        if(gate) gate.style.pointerEvents='none';
-      }
-      if(localStorage.getItem('mpl_access')==='granted'){
-        document.getElementById('accessGate').style.display='none';
-      }
+      if(localStorage.getItem('mpl_privacy_accepted')==='yes') document.getElementById('privacyModal').style.display='none';
     });
-  </script>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAT0nvHF7EL7qFQAo8nQ34MIMP8YjcNARw",
-      authDomain: "mpl-2026.firebaseapp.com",
-      projectId: "mpl-2026",
-      storageBucket: "mpl-2026.firebasestorage.app",
-      messagingSenderId: "755374470782",
-      appId: "1:755374470782:web:3be2e0b293e7476bcbca2f"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-
-    console.log("🔥 Firebase connected successfully");
-
-    const ref = doc(db, "users", "TEST-USER");
-    try {
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        console.log("✅ User data:", snap.data());
-      } else {
-        console.log("❌ User not found");
-      }
-    } catch(e) {
-      console.error("Firebase connection check run finished:", e);
-    }
   </script>
 </body>
 </html>
